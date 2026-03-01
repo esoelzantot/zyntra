@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/custom_header.dart';
+import 'package:zyntra/features/home/presentation/widgets/hero_section/home_hero_section.dart';
 
 class HomeViewWebLayout extends StatelessWidget {
   const HomeViewWebLayout({super.key});
@@ -11,10 +12,7 @@ class HomeViewWebLayout extends StatelessWidget {
         // ── Scrollable Content ────────────────────────────────
         CustomScrollView(
           slivers: [
-            // عشان المحتوى ميتغطاش بالـ header
-            SliverToBoxAdapter(
-              child: SizedBox(height: 90), // نفس ارتفاع الـ header
-            ),
+            SliverToBoxAdapter(child: HomeHeroSection()),
 
             // باقي المحتوى هنا
           ],
