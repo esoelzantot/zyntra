@@ -3,7 +3,7 @@ import 'package:zyntra/core/config/size_config.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 
 abstract class AppStyles {
-  static const fontFamily = 'Cairo';
+  static const fontFamily = 'Roboto';
   static const textHeight = 1.4;
   static const letterSpacing = 1.2;
 
