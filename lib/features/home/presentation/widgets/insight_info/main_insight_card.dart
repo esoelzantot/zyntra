@@ -70,7 +70,7 @@ class MainInsightCard extends StatelessWidget {
                 /// Description
                 Text(
                   InsightInfoData.description,
-                  style: AppStyles.styleMedium18(
+                  style: AppStyles.styleMedium20(
                     context,
                   ).copyWith(color: Colors.grey),
                 ),
@@ -80,15 +80,14 @@ class MainInsightCard extends StatelessWidget {
                 /// CTA
                 TextButton(
                   onPressed: () {},
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'Try Asky AI',
-                        style: TextStyle(
-                          color: Colors.deepOrange,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppStyles.styleBold20(
+                          context,
+                        ).copyWith(color: Colors.deepOrange),
                       ),
                       SizedBox(width: 8),
                       Icon(Icons.arrow_forward, color: Colors.deepOrange),

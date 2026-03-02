@@ -22,7 +22,6 @@ class _NewestArticlesState extends State<NewestArticles> {
   Timer? _autoScrollTimer;
   bool _isHovered = false;
 
-  static const double _cardWidth = 280;
   static const double _cardSpacing = 16;
   static const Duration _scrollInterval = Duration(milliseconds: 30);
   static const double _scrollStep = 1.2;
