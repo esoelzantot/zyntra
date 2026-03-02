@@ -49,7 +49,7 @@ class _ArticleCardState extends State<ArticleCard> {
       aspectRatio: 380 / 450,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.articleCardBG.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(12),
         ),
         clipBehavior: Clip.antiAlias,
@@ -107,10 +107,8 @@ class _ArticleCardState extends State<ArticleCard> {
 
                   // Title
                   Text(
-                    '${widget.title} - ${widget.title}',
-                    style: AppStyles.styleBold20(
-                      context,
-                    ).copyWith(color: Color(0xFF0F172A)),
+                    widget.title,
+                    style: AppStyles.styleBold20(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

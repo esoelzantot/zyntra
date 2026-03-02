@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       title: 'Zyntra',
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: AppColors.secondaryColor),
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
     );
   }
 }

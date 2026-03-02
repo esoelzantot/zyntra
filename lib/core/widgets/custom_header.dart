@@ -24,7 +24,7 @@ class _CustomHeaderState extends State<CustomHeader> {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
-        color: Color(0xFFffffff).withAlpha(25),
+        color: Color(0xffc2c2c2).withAlpha(25),
         borderRadius: BorderRadius.circular(
           DesignConstants.defaultBorderRadius,
         ),

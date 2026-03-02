@@ -155,9 +155,7 @@ class _NewestArticlesState extends State<NewestArticles> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFF1A1A1A),
+    return Padding(
       padding: const EdgeInsets.symmetric(vertical: 48),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
