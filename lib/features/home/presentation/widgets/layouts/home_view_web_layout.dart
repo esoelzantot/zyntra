@@ -13,21 +13,21 @@ class HomeViewWebLayout extends StatelessWidget {
     return Stack(
       children: [
         // ── Scrollable Content ────────────────────────────────
-        CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(child: HomeHeroSection()),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              HomeHeroSection(),
 
-            // NewestArticles
-            SliverToBoxAdapter(child: NewestArticles()),
+              // NewestArticles
+              NewestArticles(),
 
-            // InsightInfo
-            SliverToBoxAdapter(
-              child: SizedBox(height: 780, child: InsightInfo()),
-            ),
+              // InsightInfo
+              SizedBox(height: 840, child: InsightInfo()),
 
-            // Footer
-            SliverToBoxAdapter(child: CustomFooter()),
-          ],
+              // Footer
+              CustomFooter(),
+            ],
+          ),
         ),
 
         // ── Fixed Header ──────────────────────────────────────

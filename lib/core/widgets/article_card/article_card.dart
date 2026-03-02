@@ -30,23 +30,19 @@ class _ArticleCardState extends State<ArticleCard> {
   bool isBookmarked = false;
 
   void _onReadMore() {
-    // Implement read more functionality
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text('Read Full Article tapped!')));
   }
 
   void _onBookmark() {
-    setState(() {
-      isBookmarked = !isBookmarked;
-    });
-    // Implement bookmark functionality
+    setState(() => isBookmarked = !isBookmarked);
   }
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 380 / 450,
+      aspectRatio: 370 / 450,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.articleCardBG.withValues(alpha: 0.05),
@@ -55,52 +51,53 @@ class _ArticleCardState extends State<ArticleCard> {
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
-            // Image + Category Badge
-            Stack(
-              children: [
-                Image.network(
-                  widget.imageUrl,
-                  width: double.infinity,
-                  height: 200,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) =>
-                      Container(height: 200, color: const Color(0xFF1A3A4A)),
-                ),
-                Positioned(
-                  top: 12,
-                  left: 12,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF6B00),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Text(
-                      widget.category,
-                      style: AppStyles.styleBold12(context),
+            // ── Image Section ──────────────────────────────────────────
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    widget.imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) =>
+                        const ColoredBox(color: Color(0xFF1A3A4A)),
+                  ),
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFF6B00),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Text(
+                        widget.category,
+                        style: AppStyles.styleBold12(context),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
 
-            // Content
+            // ── Content Section ────────────────────────────────────────
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Date & Read Time
+                  // Date
                   Text(
                     widget.date,
                     style: AppStyles.styleMedium14(
                       context,
-                    ).copyWith(color: Color(0xFF64748B)),
+                    ).copyWith(color: const Color(0xFF64748B)),
                   ),
 
                   const SizedBox(height: 8),
@@ -120,14 +117,14 @@ class _ArticleCardState extends State<ArticleCard> {
                     widget.description,
                     style: AppStyles.styleRegular14(
                       context,
-                    ).copyWith(color: Color(0xFF64748B)),
+                    ).copyWith(color: const Color(0xFF64748B)),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
 
                   const SizedBox(height: 16),
 
-                  // Read Full Paper + Bookmark
+                  // Read Full Article + Bookmark
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -139,21 +136,20 @@ class _ArticleCardState extends State<ArticleCard> {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: _onBookmark,
-                          child: isBookmarked
-                              ? Icon(
-                                  Icons.bookmark_add_rounded,
-                                  color: AppColors.primaryColor,
-                                  size: 20,
-                                )
-                              : const Icon(
-                                  Icons.bookmark_add_outlined,
-                                  color: Color(0xFF999999),
-                                  size: 20,
-                                ),
+                          child: Icon(
+                            isBookmarked
+                                ? Icons.bookmark_add_rounded
+                                : Icons.bookmark_add_outlined,
+                            color: isBookmarked
+                                ? AppColors.primaryColor
+                                : const Color(0xFF999999),
+                            size: 20,
+                          ),
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 10),
                 ],
               ),
             ),

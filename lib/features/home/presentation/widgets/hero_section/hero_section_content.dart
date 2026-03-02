@@ -35,7 +35,7 @@ class HeroSectionContent extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'LIVE FROM KEPLER-186F STATION',
+                  HeroSectionData.badge,
                   style: AppStyles.styleBold12(context),
                 ),
               ],
@@ -46,7 +46,7 @@ class HeroSectionContent extends StatelessWidget {
 
           // TITLE
           Text(
-            HerSectionData.title,
+            HeroSectionData.title,
             style: AppStyles.styleBold24(
               context,
             ).copyWith(fontSize: 70, fontWeight: FontWeight.w900),
@@ -54,7 +54,7 @@ class HeroSectionContent extends StatelessWidget {
 
           // SUBTITLE
           Text(
-            HerSectionData.subTitle,
+            HeroSectionData.subTitle,
             style: AppStyles.styleBold24(context).copyWith(
               fontSize: 70,
               fontWeight: FontWeight.w900,
@@ -68,7 +68,7 @@ class HeroSectionContent extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.5,
             child: Text(
-              HerSectionData.description,
+              HeroSectionData.description,
               style: AppStyles.styleMedium24(
                 context,
               ).copyWith(color: AppColors.subTextColor),
@@ -84,14 +84,14 @@ class HeroSectionContent extends StatelessWidget {
               // Launch Research Portal button
               CustomElevatedButton(
                 onPress: () {},
-                title: "Browse Articles",
+                title: "Browse Archive",
                 backgroundColor: AppColors.primaryColor,
               ),
 
               const SizedBox(width: 16),
 
               // View Lab Specs button
-              CustomOutlinedButton(onPress: () {}, title: "Ask Asky"),
+              CustomOutlinedButton(onPress: () {}, title: "Try Asky AI"),
             ],
           ),
         ],

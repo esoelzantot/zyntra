@@ -9,8 +9,8 @@ class CopyrightBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             '© 2026 Zyntra Biology Space. All rights reserved. ',
@@ -19,15 +19,16 @@ class CopyrightBar extends StatelessWidget {
               context,
             ).copyWith(color: Colors.grey.shade500),
           ),
-          // const SizedBox(height: 8),
+          const SizedBox(height: 6),
           Row(
             textBaseline: TextBaseline.alphabetic,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
               Text(
                 'Developed by',
                 textAlign: TextAlign.center,
-                style: AppStyles.styleMedium18(context),
+                style: AppStyles.styleMedium16(context),
               ),
               TextButton(
                 onPressed: () => launchUrlFunc('https://www.axuraa.com'),
@@ -40,14 +41,14 @@ class CopyrightBar extends StatelessWidget {
                   children: [
                     Text(
                       'A',
-                      style: AppStyles.styleBold24(
+                      style: AppStyles.styleBold20(
                         context,
                       ).copyWith(color: Color(0xffE07B39)),
                     ),
-                    Text('X', style: AppStyles.styleBold24(context)),
+                    Text('X', style: AppStyles.styleBold20(context)),
                     Text(
                       'URAA',
-                      style: AppStyles.styleBold24(
+                      style: AppStyles.styleBold20(
                         context,
                       ).copyWith(color: Color(0xffE07B39)),
                     ),
@@ -57,7 +58,7 @@ class CopyrightBar extends StatelessWidget {
               Text(
                 '.Powered by Flutter.',
                 textAlign: TextAlign.center,
-                style: AppStyles.styleMedium18(context),
+                style: AppStyles.styleMedium16(context),
               ),
             ],
           ),

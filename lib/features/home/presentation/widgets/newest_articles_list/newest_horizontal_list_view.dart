@@ -197,7 +197,7 @@ class _NewestArticlesState extends State<NewestArticles> {
             onEnter: (_) => setState(() => _isHovered = true),
             onExit: (_) => setState(() => _isHovered = false),
             child: SizedBox(
-              height: 380,
+              height: 400,
               child: ScrollConfiguration(
                 behavior: ScrollConfiguration.of(context).copyWith(
                   dragDevices: {
