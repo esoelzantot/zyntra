@@ -12,7 +12,7 @@ class CustomHeader extends StatefulWidget {
 class _CustomHeaderState extends State<CustomHeader> {
   int _hoveredIndex = -1;
 
-  static const _navItems = ['Asky', 'Articles', 'Home', 'About'];
+  static const _navItems = ['Asky', 'Articles', 'Home', 'Library', 'About'];
 
   static const _textColor = Color(0xFFE5E5E5);
   static const _mutedText = Color(0xFF9A9A9A);

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/data/hero_section_data.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
-import 'package:zyntra/core/widgets/custom_elevated_button.dart';
-import 'package:zyntra/core/widgets/custom_outlined_button.dart';
+import 'package:zyntra/core/widgets/buttons/custom_elevated_button.dart';
+import 'package:zyntra/core/widgets/buttons/custom_outlined_button.dart';
 
 class HeroSectionContent extends StatelessWidget {
   const HeroSectionContent({super.key});
@@ -75,7 +75,7 @@ class HeroSectionContent extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 36),
+          const SizedBox(height: 24),
 
           // BUTTONS ROW
           Row(
@@ -88,7 +88,7 @@ class HeroSectionContent extends StatelessWidget {
                 backgroundColor: AppColors.primaryColor,
               ),
 
-              const SizedBox(width: 12),
+              const SizedBox(width: 16),
 
               // View Lab Specs button
               CustomOutlinedButton(onPress: () {}, title: "Ask Asky"),

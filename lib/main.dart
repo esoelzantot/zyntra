@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zyntra/core/routing/router.dart';
 import 'package:zyntra/core/services/services_locator.dart';
 import 'package:zyntra/core/services/simple_bloc_observer.dart';
+import 'package:zyntra/core/utils/app_colors.dart';
 
 Future<void> hiveSetup() async {
   // initializing hive
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       title: 'Zyntra',
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.secondaryColor),
     );
   }
 }
