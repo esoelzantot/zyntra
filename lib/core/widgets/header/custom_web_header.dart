@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/constants/design_constants.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 
-class CustomHeader extends StatefulWidget {
-  const CustomHeader({super.key});
+class CustomWebHeader extends StatefulWidget {
+  const CustomWebHeader({super.key});
 
   @override
-  State<CustomHeader> createState() => _CustomHeaderState();
+  State<CustomWebHeader> createState() => _CustomWebHeaderState();
 }
 
-class _CustomHeaderState extends State<CustomHeader> {
+class _CustomWebHeaderState extends State<CustomWebHeader> {
   int _hoveredIndex = -1;
 
   static const _navItems = ['Asky', 'Articles', 'Home', 'Library', 'About'];
