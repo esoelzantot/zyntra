@@ -322,6 +322,186 @@ abstract class AppStyles {
     );
   }
 
+  // Styles 28
+  static TextStyle styleRegular28(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 28),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w400,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleMedium28(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 28),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w500,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleSemiBold28(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 28),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w600,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleBold28(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 28),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w700,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  // Styles 30
+  static TextStyle styleRegular30(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w400,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleMedium30(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w500,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleSemiBold30(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w600,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleBold30(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w700,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  // Styles 32
+  static TextStyle styleRegular32(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 32),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w400,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleMedium32(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 32),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w500,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleSemiBold32(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 32),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w600,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleBold32(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 32),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w700,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  // Styles 36
+  static TextStyle styleRegular36(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 36),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w400,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleMedium36(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 36),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w500,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleSemiBold36(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 36),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w600,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static TextStyle styleBold36(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 36),
+      fontFamily: fontFamily,
+      fontWeight: FontWeight.w700,
+      height: textHeight,
+      color: AppColors.mainTextColor,
+      letterSpacing: letterSpacing,
+    );
+  }
+
   static double getResponsiveFontSize(context, {required double fontSize}) {
     double scaleFactor = getScaleFactor(context);
     double responsiveFontSize = fontSize * scaleFactor;
@@ -335,9 +515,9 @@ abstract class AppStyles {
   static double getScaleFactor(context) {
     double width = MediaQuery.sizeOf(context).width;
     if (width < SizeConfig.tablet) {
-      return width / 400;
+      return width / 450;
     } else if (width < SizeConfig.desktop) {
-      return width / 800;
+      return width / 850;
     } else {
       return width / 1800;
     }

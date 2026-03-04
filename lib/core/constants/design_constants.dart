@@ -1,6 +1,6 @@
 class DesignConstants {
   // PADDING
-  static const double defaultButton_VP = 20.0;
+  static const double defaultButton_VP = 12.0;
   static const double defaultButton_HP = 24.0;
 
   // BORDER RADIUS

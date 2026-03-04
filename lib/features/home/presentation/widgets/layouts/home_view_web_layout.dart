@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:zyntra/core/widgets/custom_header.dart';
+import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
+import 'package:zyntra/core/widgets/header/custom_web_header.dart';
 import 'package:zyntra/features/home/presentation/widgets/hero_section/home_hero_section.dart';
+import 'package:zyntra/features/home/presentation/widgets/insight_info/insight_info_horizontal.dart';
+import 'package:zyntra/features/home/presentation/widgets/newest_articles_list/newest_horizontal_list_view.dart';
 
 class HomeViewWebLayout extends StatelessWidget {
   const HomeViewWebLayout({super.key});
@@ -10,16 +13,25 @@ class HomeViewWebLayout extends StatelessWidget {
     return Stack(
       children: [
         // ── Scrollable Content ────────────────────────────────
-        CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(child: HomeHeroSection()),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              HomeHeroSection(),
 
-            // باقي المحتوى هنا
-          ],
+              // NewestArticles
+              NewestArticles(),
+
+              // InsightInfo
+              SizedBox(height: 840, child: InsightInfo()),
+
+              // Footer
+              CustomFooterHorizontal(),
+            ],
+          ),
         ),
 
         // ── Fixed Header ──────────────────────────────────────
-        Positioned(top: 0, left: 0, right: 0, child: CustomHeader()),
+        Positioned(top: 0, left: 0, right: 0, child: CustomWebHeader()),
       ],
     );
   }
