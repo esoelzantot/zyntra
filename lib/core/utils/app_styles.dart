@@ -506,8 +506,8 @@ abstract class AppStyles {
     double scaleFactor = getScaleFactor(context);
     double responsiveFontSize = fontSize * scaleFactor;
 
-    double lowerLimit = fontSize * 0.75;
-    double upperLimit = fontSize * 1.25;
+    double lowerLimit = fontSize * 0.8;
+    double upperLimit = fontSize * 1.2;
 
     return responsiveFontSize.clamp(lowerLimit, upperLimit);
   }
@@ -515,9 +515,9 @@ abstract class AppStyles {
   static double getScaleFactor(context) {
     double width = MediaQuery.sizeOf(context).width;
     if (width < SizeConfig.tablet) {
-      return width / 400;
+      return width / 450;
     } else if (width < SizeConfig.desktop) {
-      return width / 800;
+      return width / 850;
     } else {
       return width / 1800;
     }

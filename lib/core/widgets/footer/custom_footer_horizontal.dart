@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/functions/launch_url.dart';
 import 'package:zyntra/core/utils/app_assets.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
-import 'package:zyntra/core/widgets/footer/copyright_bart.dart';
+import 'package:zyntra/core/widgets/footer/copyright_bar.dart';
 import 'package:zyntra/core/widgets/footer/custom_icon_button.dart';
 
-class CustomFooter extends StatelessWidget {
-  const CustomFooter({super.key});
+class CustomFooterHorizontal extends StatelessWidget {
+  const CustomFooterHorizontal({super.key});
 
   @override
   Widget build(BuildContext context) {

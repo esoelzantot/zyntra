@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/custom_header.dart';
-import 'package:zyntra/core/widgets/footer/custom_footer.dart';
+import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/features/home/presentation/widgets/hero_section/home_hero_section.dart';
-import 'package:zyntra/features/home/presentation/widgets/insight_info/insight_info.dart';
+import 'package:zyntra/features/home/presentation/widgets/insight_info/insight_info_horizontal.dart';
 import 'package:zyntra/features/home/presentation/widgets/newest_articles_list/newest_horizontal_list_view.dart';
 
 class HomeViewWebLayout extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomeViewWebLayout extends StatelessWidget {
               SizedBox(height: 840, child: InsightInfo()),
 
               // Footer
-              CustomFooter(),
+              CustomFooterHorizontal(),
             ],
           ),
         ),

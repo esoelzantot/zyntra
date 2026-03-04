@@ -161,13 +161,12 @@ class _NewestArticlesState extends State<NewestArticles> {
         children: [
           // ── Section Header ──────────────────────────────────────────
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'NEWEST ARTICLES',
@@ -175,16 +174,19 @@ class _NewestArticlesState extends State<NewestArticles> {
                         context,
                       ).copyWith(color: AppColors.primaryColor),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Research Repository',
-                      style: AppStyles.styleBold36(context),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: CustomOutlinedButton(
+                        onPress: widget.onSeeAll,
+                        title: 'See All',
+                      ),
                     ),
                   ],
                 ),
-                CustomOutlinedButton(
-                  onPress: widget.onSeeAll,
-                  title: 'See All',
+                SizedBox(height: 6),
+                Text(
+                  'Research Repository',
+                  style: AppStyles.styleBold36(context),
                 ),
               ],
             ),

@@ -10,7 +10,7 @@ class InsightInfoTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 50),
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 24),
       child: Column(
         children: [
           /// MAIN CARD
