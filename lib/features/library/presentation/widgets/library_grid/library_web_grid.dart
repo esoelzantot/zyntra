@@ -176,8 +176,8 @@ class AppColors {
 
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
-class ArticlesWebGrid extends StatefulWidget {
-  const ArticlesWebGrid({
+class LibraryWebGrid extends StatefulWidget {
+  const LibraryWebGrid({
     super.key,
     required this.selectedCategories, // ✅ بيستقبل من الـ parent
   });
@@ -185,10 +185,10 @@ class ArticlesWebGrid extends StatefulWidget {
   final Set<String> selectedCategories;
 
   @override
-  State<ArticlesWebGrid> createState() => _ArticlesWebGridState();
+  State<LibraryWebGrid> createState() => _LibraryWebGridState();
 }
 
-class _ArticlesWebGridState extends State<ArticlesWebGrid> {
+class _LibraryWebGridState extends State<LibraryWebGrid> {
   int _currentPage = 1;
   static const int _pageSize = 9;
 
@@ -202,7 +202,7 @@ class _ArticlesWebGridState extends State<ArticlesWebGrid> {
 
   // ✅ لو الـ categories اتغيرت، ارجع للـ page الأولى
   @override
-  void didUpdateWidget(ArticlesWebGrid oldWidget) {
+  void didUpdateWidget(LibraryWebGrid oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.selectedCategories != widget.selectedCategories) {
       _currentPage = 1;

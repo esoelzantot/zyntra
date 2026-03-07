@@ -105,7 +105,7 @@ class _ArticleCardState extends State<ArticleCard> {
                   // Title
                   Text(
                     widget.title,
-                    style: AppStyles.styleBold20(context),
+                    style: AppStyles.styleBold22(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -115,7 +115,7 @@ class _ArticleCardState extends State<ArticleCard> {
                   // Description
                   Text(
                     widget.description,
-                    style: AppStyles.styleRegular14(
+                    style: AppStyles.styleMedium16(
                       context,
                     ).copyWith(color: const Color(0xFF64748B)),
                     maxLines: 2,

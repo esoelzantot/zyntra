@@ -13,8 +13,8 @@ class ResearchCategory {
 }
 
 // ─── Widget ───────────────────────────────────────────────────────────────────
-class ArticlesHeroSection extends StatelessWidget {
-  const ArticlesHeroSection({
+class LibraryHeroSection extends StatelessWidget {
+  const LibraryHeroSection({
     super.key,
     required this.selectedCategories,
     required this.onCategoryToggled,
@@ -44,7 +44,7 @@ class ArticlesHeroSection extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: 'NASA Intelligence ',
+                  text: 'Saved ',
                   style: AppStyles.styleBold36(
                     context,
                   ).copyWith(fontWeight: FontWeight.w900, fontSize: 44),
@@ -63,9 +63,9 @@ class ArticlesHeroSection extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(left: 20, right: 80, top: 12),
+          padding: const EdgeInsets.only(left: 20, right: 80, top: 10),
           child: Text(
-            'Your ultimate gateway to the frontiers of space science. Analyze thousands of complex studies through AI-driven summaries and precision MindMaps in seconds.',
+            'Access your bookmarked articles and their corresponding AI intelligence reports in one organized space.',
             style: AppStyles.styleMedium20(
               context,
             ).copyWith(color: const Color(0xFF6B7280)),
@@ -88,6 +88,7 @@ class ArticlesHeroSection extends StatelessWidget {
               return CategoryChip(
                 label: cat.label,
                 isSelected: isSelected,
+                // ✅ بيستدعي الـ callback في الـ parent
                 onTap: () => onCategoryToggled(cat.id),
                 selectedColor: const Color(0xFFE8521A),
                 borderColor: const Color(0xFFD1D5DB),
