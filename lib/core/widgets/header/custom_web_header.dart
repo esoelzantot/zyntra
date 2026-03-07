@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zyntra/core/constants/design_constants.dart';
+import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 
 class CustomWebHeader extends StatefulWidget {
@@ -12,7 +14,7 @@ class CustomWebHeader extends StatefulWidget {
 class _CustomWebHeaderState extends State<CustomWebHeader> {
   int _hoveredIndex = -1;
 
-  static const _navItems = ['Asky', 'Articles', 'Home', 'Library', 'About'];
+  static const _navItems = ['Home', 'Asky', 'Articles', 'Library', 'About'];
 
   static const _textColor = Color(0xFFE5E5E5);
   static const _mutedText = Color(0xFF9A9A9A);
@@ -52,7 +54,10 @@ class _CustomWebHeaderState extends State<CustomWebHeader> {
                     ),
                     child: Row(
                       children: [
-                        Text(_navItems[i]),
+                        GestureDetector(
+                          onTap: () => _handleNavigation(i),
+                          child: Text(_navItems[i]),
+                        ),
                         if (isHovered)
                           Container(
                             margin: const EdgeInsets.only(left: 6),
@@ -78,6 +83,19 @@ class _CustomWebHeaderState extends State<CustomWebHeader> {
         ],
       ),
     );
+  }
+
+  // ── Navigation Handle ───────────────────────────────────────────────────────────────
+  void _handleNavigation(int index) {
+    switch (index) {
+      case 0:
+        GoRouter.of(context).push(EndPoints.homeView);
+        break;
+      case 2:
+        GoRouter.of(context).push(EndPoints.articlesView);
+        break;
+      default:
+    }
   }
 }
 

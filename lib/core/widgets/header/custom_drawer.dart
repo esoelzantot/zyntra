@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 
@@ -36,7 +38,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
       width: 290,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.backgroundColor.withValues(alpha: 0.8),
+        color: AppColors.backgroundColor.withValues(alpha: 0.90),
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           bottomRight: Radius.circular(20),
@@ -111,6 +113,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   padding: const EdgeInsets.only(bottom: 12),
                   child: GestureDetector(
                     onTap: () {
+                      _handleNavigation(index);
                       if (item.hasArrow) {
                         setState(() {
                           isExpanded
@@ -185,6 +188,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ],
       ),
     );
+  }
+
+  // ── Navigation Handle ───────────────────────────────────────────────────────────────
+  void _handleNavigation(int index) {
+    switch (index) {
+      case 0:
+        GoRouter.of(context).push(EndPoints.homeView);
+        break;
+      case 2:
+        GoRouter.of(context).push(EndPoints.articlesView);
+        break;
+      default:
+    }
   }
 }
 
