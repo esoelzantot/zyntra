@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/article_card/article_card.dart';
@@ -10,8 +12,7 @@ import 'package:zyntra/core/widgets/buttons/custom_outlined_button.dart';
 // ─── Newest Articles Section ─────────────────────────────────────────────────
 
 class NewestArticles extends StatefulWidget {
-  final VoidCallback? onSeeAll;
-  const NewestArticles({super.key, this.onSeeAll});
+  const NewestArticles({super.key});
 
   @override
   State<NewestArticles> createState() => _NewestArticlesState();
@@ -177,7 +178,7 @@ class _NewestArticlesState extends State<NewestArticles> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: CustomOutlinedButton(
-                        onPress: widget.onSeeAll,
+                        onPress: () => _handleSeeAll(),
                         title: 'See All',
                       ),
                     ),
@@ -232,5 +233,10 @@ class _NewestArticlesState extends State<NewestArticles> {
         ],
       ),
     );
+  }
+
+  void _handleSeeAll() {
+    // Implement navigation to the full articles list page
+    GoRouter.of(context).push(EndPoints.articlesView);
   }
 }

@@ -13,8 +13,16 @@ class HeroSectionContent extends StatefulWidget {
 }
 
 class _HeroSectionContentState extends State<HeroSectionContent> {
-  late double width = MediaQuery.sizeOf(context).width;
-  late double padding = (width < SizeConfig.tablet) ? 12.0 : 36.0;
+  late double width;
+  late double padding;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    width = MediaQuery.sizeOf(context).width;
+    padding = (width < SizeConfig.tablet) ? 12.0 : 36.0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

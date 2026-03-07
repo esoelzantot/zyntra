@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zyntra/core/helpers/app_transitions.dart';
 import 'package:zyntra/core/routing/end_points.dart';
+import 'package:zyntra/features/articles/presentation/views/articles_view.dart';
 import 'package:zyntra/features/home/presentation/views/home_view.dart';
+import 'package:zyntra/features/library/presentation/views/library_view.dart';
 import 'package:zyntra/features/splash/views/splash_view.dart';
 
 class AppRouter {
@@ -32,14 +34,22 @@ class AppRouter {
       // ============================================================
       // Articles Screen - Smooth Fade
       // ============================================================
-      // GoRoute(
-      //   path: EndPoints.articlesView,
-      //   name: 'Articles View',
-      //   pageBuilder: (context, state) => AppTransitions.smoothFade(
-      //     state.pageKey,
-      //     const ArticlesView(),
-      //   ),
-      // ),
+      GoRoute(
+        path: EndPoints.articlesView,
+        name: 'Articles View',
+        pageBuilder: (context, state) =>
+            AppTransitions.smoothFade(state.pageKey, const ArticlesView()),
+      ),
+
+      // ============================================================
+      // Articles Screen - Smooth Fade
+      // ============================================================
+      GoRoute(
+        path: EndPoints.libraryView,
+        name: 'Library View',
+        pageBuilder: (context, state) =>
+            AppTransitions.smoothFade(state.pageKey, const LibraryView()),
+      ),
 
       // ============================================================
       // Article Details View - Fade with Scale

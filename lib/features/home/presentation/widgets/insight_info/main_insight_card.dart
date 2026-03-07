@@ -12,8 +12,15 @@ class MainInsightCard extends StatefulWidget {
 }
 
 class _MainInsightCardState extends State<MainInsightCard> {
-  late double width = MediaQuery.sizeOf(context).width;
-  late double spacer = (width < SizeConfig.tablet) ? 40.0 : 240.0;
+  late double width;
+  late double spacer;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    width = MediaQuery.sizeOf(context).width;
+    spacer = (width < SizeConfig.tablet) ? 40.0 : 240.0;
+  }
 
   @override
   Widget build(BuildContext context) {

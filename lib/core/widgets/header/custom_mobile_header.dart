@@ -3,7 +3,7 @@ import 'package:zyntra/core/constants/design_constants.dart';
 
 class CustomMobileHeader extends StatelessWidget
     implements PreferredSizeWidget {
-  final VoidCallback? onMenuTap; // ✅ callback بدل Scaffold.of(context)
+  final VoidCallback? onMenuTap;
 
   const CustomMobileHeader({super.key, this.onMenuTap});
 
