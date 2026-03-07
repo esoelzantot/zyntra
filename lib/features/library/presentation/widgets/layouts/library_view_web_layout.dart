@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
 import 'package:zyntra/features/library/presentation/widgets/hero_section/library_hero_section.dart';
-import 'package:zyntra/features/library/presentation/widgets/library_grid/library_web_grid.dart';
+import 'package:zyntra/features/library/presentation/widgets/library_grid/library_grid.dart';
 
 class LibraryViewWebLayout extends StatefulWidget {
   const LibraryViewWebLayout({super.key});
@@ -52,7 +52,7 @@ class _LibraryViewWebLayoutState extends State<LibraryViewWebLayout> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: LibraryWebGrid(
+                child: LibraryGrid(
                   // ✅ بنمرر الـ selected categories للـ grid
                   selectedCategories: _selectedCategories,
                 ),

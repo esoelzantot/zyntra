@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
-import 'package:zyntra/features/articles/presentation/widgets/articles_grid/articles_web_grid.dart';
+import 'package:zyntra/features/articles/presentation/widgets/articles_grid/articles_grid.dart';
 import 'package:zyntra/features/articles/presentation/widgets/hero_section/articles_hero_section.dart';
 
 class ArticlesViewWebLayout extends StatefulWidget {
@@ -53,7 +53,7 @@ class _ArticlesViewWebLayoutState extends State<ArticlesViewWebLayout> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: ArticlesWebGrid(
+                child: ArticlesGrid(
                   // ✅ بنمرر الـ selected categories للـ grid
                   selectedCategories: _selectedCategories,
                 ),

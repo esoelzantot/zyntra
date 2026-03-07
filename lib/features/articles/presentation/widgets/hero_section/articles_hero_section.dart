@@ -74,16 +74,12 @@ class ArticlesHeroSection extends StatelessWidget {
 
         const SizedBox(height: 40),
 
-        SizedBox(
-          height: 44,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemCount: _categories.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
-            itemBuilder: (context, index) {
-              final cat = _categories[index];
-              // ✅ بيقرأ الـ state من الـ parent
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Wrap(
+            spacing: 10, // المسافة الأفقية بين الـ chips
+            runSpacing: 10, // المسافة العمودية لما يحصل wrap
+            children: _categories.map((cat) {
               final isSelected = selectedCategories.contains(cat.id);
               return CategoryChip(
                 label: cat.label,
@@ -93,7 +89,7 @@ class ArticlesHeroSection extends StatelessWidget {
                 borderColor: const Color(0xFFD1D5DB),
                 navyText: const Color(0xFF1A2340),
               );
-            },
+            }).toList(),
           ),
         ),
 

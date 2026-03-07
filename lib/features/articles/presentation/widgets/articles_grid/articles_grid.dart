@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zyntra/core/config/size_config.dart';
 import 'package:zyntra/core/widgets/article_card/article_card.dart';
 
 // ─── Models ───────────────────────────────────────────────────────────────────
@@ -176,8 +177,8 @@ class AppColors {
 
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
-class ArticlesWebGrid extends StatefulWidget {
-  const ArticlesWebGrid({
+class ArticlesGrid extends StatefulWidget {
+  const ArticlesGrid({
     super.key,
     required this.selectedCategories, // ✅ بيستقبل من الـ parent
   });
@@ -185,12 +186,16 @@ class ArticlesWebGrid extends StatefulWidget {
   final Set<String> selectedCategories;
 
   @override
-  State<ArticlesWebGrid> createState() => _ArticlesWebGridState();
+  State<ArticlesGrid> createState() => _ArticlesGridState();
 }
 
-class _ArticlesWebGridState extends State<ArticlesWebGrid> {
+class _ArticlesGridState extends State<ArticlesGrid> {
   int _currentPage = 1;
-  static const int _pageSize = 9;
+  static int pageSize = 9;
+
+  late double width;
+  late int crossAxisCount;
+  late double childAspectRatio;
 
   List<ArticleModel> get _filteredArticles {
     // ✅ بيستخدم widget.selectedCategories بدل local state
@@ -202,23 +207,49 @@ class _ArticlesWebGridState extends State<ArticlesWebGrid> {
 
   // ✅ لو الـ categories اتغيرت، ارجع للـ page الأولى
   @override
-  void didUpdateWidget(ArticlesWebGrid oldWidget) {
+  void didUpdateWidget(ArticlesGrid oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.selectedCategories != widget.selectedCategories) {
       _currentPage = 1;
     }
   }
 
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    width = MediaQuery.sizeOf(context).width;
+    if (width <= SizeConfig.tablet) {
+      setState(() {
+        crossAxisCount = 1;
+        childAspectRatio = 0.75;
+        pageSize = 6;
+      });
+    } else if (width <= SizeConfig.desktop) {
+      setState(() {
+        crossAxisCount = 2;
+        childAspectRatio = 0.85;
+        pageSize = 8;
+      });
+    } else {
+      setState(() {
+        crossAxisCount = 3;
+        childAspectRatio = 1.0;
+        pageSize = 9;
+      });
+    }
+  }
+
   List<ArticleModel> get _pagedArticles {
     final all = _filteredArticles;
-    final start = (_currentPage - 1) * _pageSize;
-    final end = (start + _pageSize).clamp(0, all.length);
+    final start = (_currentPage - 1) * pageSize;
+    final end = (start + pageSize).clamp(0, all.length);
     if (start >= all.length) return [];
     return all.sublist(start, end);
   }
 
   int get _totalPages =>
-      (_filteredArticles.length / _pageSize).ceil().clamp(1, 999);
+      (_filteredArticles.length / pageSize).ceil().clamp(1, 999);
 
   @override
   Widget build(BuildContext context) {
@@ -252,11 +283,11 @@ class _ArticlesWebGridState extends State<ArticlesWebGrid> {
       shrinkWrap: true, // ✅ ضروري
       physics: const NeverScrollableScrollPhysics(), // ✅ الـ scroll للـ parent
       padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
         mainAxisSpacing: 24,
         crossAxisSpacing: 24,
-        childAspectRatio: 1.0,
+        childAspectRatio: childAspectRatio,
       ),
       itemCount: _pagedArticles.length,
       itemBuilder: (_, i) {

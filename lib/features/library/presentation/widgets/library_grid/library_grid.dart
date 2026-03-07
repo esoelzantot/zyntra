@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zyntra/core/config/size_config.dart';
 import 'package:zyntra/core/widgets/article_card/article_card.dart';
 
 // ─── Models ───────────────────────────────────────────────────────────────────
@@ -176,8 +177,8 @@ class AppColors {
 
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
-class LibraryWebGrid extends StatefulWidget {
-  const LibraryWebGrid({
+class LibraryGrid extends StatefulWidget {
+  const LibraryGrid({
     super.key,
     required this.selectedCategories, // ✅ بيستقبل من الـ parent
   });
@@ -185,12 +186,16 @@ class LibraryWebGrid extends StatefulWidget {
   final Set<String> selectedCategories;
 
   @override
-  State<LibraryWebGrid> createState() => _LibraryWebGridState();
+  State<LibraryGrid> createState() => _LibraryGridState();
 }
 
-class _LibraryWebGridState extends State<LibraryWebGrid> {
+class _LibraryGridState extends State<LibraryGrid> {
   int _currentPage = 1;
-  static const int _pageSize = 9;
+  static int pageSize = 9;
+
+  late double width;
+  late int crossAxisCount;
+  late double childAspectRatio;
 
   List<ArticleModel> get _filteredArticles {
     // ✅ بيستخدم widget.selectedCategories بدل local state
@@ -202,23 +207,49 @@ class _LibraryWebGridState extends State<LibraryWebGrid> {
 
   // ✅ لو الـ categories اتغيرت، ارجع للـ page الأولى
   @override
-  void didUpdateWidget(LibraryWebGrid oldWidget) {
+  void didUpdateWidget(LibraryGrid oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.selectedCategories != widget.selectedCategories) {
       _currentPage = 1;
     }
   }
 
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    width = MediaQuery.sizeOf(context).width;
+    if (width <= SizeConfig.tablet) {
+      setState(() {
+        crossAxisCount = 1;
+        childAspectRatio = 0.75;
+        pageSize = 6;
+      });
+    } else if (width <= SizeConfig.desktop) {
+      setState(() {
+        crossAxisCount = 2;
+        childAspectRatio = 0.85;
+        pageSize = 8;
+      });
+    } else {
+      setState(() {
+        crossAxisCount = 3;
+        childAspectRatio = 1.0;
+        pageSize = 9;
+      });
+    }
+  }
+
   List<ArticleModel> get _pagedArticles {
     final all = _filteredArticles;
-    final start = (_currentPage - 1) * _pageSize;
-    final end = (start + _pageSize).clamp(0, all.length);
+    final start = (_currentPage - 1) * pageSize;
+    final end = (start + pageSize).clamp(0, all.length);
     if (start >= all.length) return [];
     return all.sublist(start, end);
   }
 
   int get _totalPages =>
-      (_filteredArticles.length / _pageSize).ceil().clamp(1, 999);
+      (_filteredArticles.length / pageSize).ceil().clamp(1, 999);
 
   @override
   Widget build(BuildContext context) {
