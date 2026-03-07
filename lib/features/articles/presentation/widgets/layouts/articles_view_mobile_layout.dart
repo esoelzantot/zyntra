@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_vertical.dart';
+import 'package:zyntra/core/widgets/header/custom_drawer.dart';
 import 'package:zyntra/core/widgets/header/custom_mobile_header.dart';
 import 'package:zyntra/features/articles/presentation/widgets/articles_grid/articles_grid.dart';
 import 'package:zyntra/features/articles/presentation/widgets/hero_section/articles_hero_section.dart';
@@ -13,6 +14,11 @@ class ArticlesViewMobileLayout extends StatefulWidget {
 }
 
 class _ArticlesViewMobileLayoutState extends State<ArticlesViewMobileLayout> {
+  bool _isDrawerOpen = false;
+
+  void _openDrawer() => setState(() => _isDrawerOpen = true);
+  void _closeDrawer() => setState(() => _isDrawerOpen = false);
+
   // ✅ State واحدة مشتركة بين الـ widgets
   final Set<String> _selectedCategories = {'all'};
 
@@ -65,7 +71,41 @@ class _ArticlesViewMobileLayoutState extends State<ArticlesViewMobileLayout> {
           ),
         ),
 
-        Positioned(top: 0, left: 0, right: 0, child: CustomMobileHeader()),
+        // ── Fixed Header ──────────────────────────────────────
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: CustomMobileHeader(
+            onMenuTap: _openDrawer, // ✅ بنمرر الـ callback
+          ),
+        ),
+
+        // ── Scrim (backdrop) ─────────────────────────────────
+        if (_isDrawerOpen)
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: _closeDrawer,
+              child: AnimatedOpacity(
+                opacity: _isDrawerOpen ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 300),
+                child: Container(color: Colors.black.withAlpha(140)),
+              ),
+            ),
+          ),
+
+        // ── Drawer Panel ──────────────────────────────────────
+        AnimatedPositioned(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          top: 0,
+          bottom: 0,
+          left: _isDrawerOpen ? 0 : -300,
+          width: 290,
+          child: CustomDrawer(
+            onClose: _closeDrawer,
+          ), // ✅ بنمرر الـ close callback
+        ),
       ],
     );
   }
