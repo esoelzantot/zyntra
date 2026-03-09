@@ -23,16 +23,17 @@ class ArticleAbstract extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Title
-              Text('ABSTRACT', style: AppStyles.styleBold24(context)),
+              Text('ABSTRACT', style: AppStyles.styleBold28(context)),
 
               const SizedBox(height: 16),
 
               // Body text
               Text(
                 abstractText,
-                style: AppStyles.styleRegular18(
+                style: AppStyles.styleRegular20(
                   context,
                 ).copyWith(color: Color(0xFFB0BEC5)),
+                textAlign: TextAlign.justify,
               ),
             ],
           ),

@@ -52,7 +52,7 @@ class ArticleDetailsWebLayout extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(flex: 2, child: ArticleMainContent()),
-                    const SizedBox(width: 40),
+                    const SizedBox(width: 48),
                     Expanded(flex: 1, child: ArticleSideContent()),
                   ],
                 ),

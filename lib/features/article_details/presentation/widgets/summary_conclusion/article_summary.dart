@@ -28,6 +28,7 @@ class ArticleSummary extends StatelessWidget {
               style: AppStyles.styleRegular18(
                 context,
               ).copyWith(color: Color(0xFFB0BEC5)),
+              textAlign: TextAlign.justify,
             ),
           ),
         ],

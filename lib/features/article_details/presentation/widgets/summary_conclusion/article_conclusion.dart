@@ -29,6 +29,7 @@ class ArticleConclusion extends StatelessWidget {
             style: AppStyles.styleRegular18(
               context,
             ).copyWith(color: Color(0xffCBD5E1)),
+            textAlign: TextAlign.justify,
           ),
         ],
       ),

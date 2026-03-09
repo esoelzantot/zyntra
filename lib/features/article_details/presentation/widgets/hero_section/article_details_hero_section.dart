@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
+import 'package:zyntra/core/widgets/custom_divider.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/buttons/view_pdf_button.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/buttons/visit_link_button.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/hero_section/topic_chip.dart';
@@ -108,11 +109,7 @@ class ArticleDetailsHeroSection extends StatelessWidget {
         const SizedBox(height: 20),
 
         // ── Bottom divider ──────────────────────────────────────
-        Divider(
-          height: 0.5,
-          thickness: 0.5,
-          color: const Color(0xFFD1D5DB).withValues(alpha: 0.75),
-        ),
+        CustomDivider(),
       ],
     );
   }

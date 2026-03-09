@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zyntra/core/utils/app_colors.dart';
+import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/mind_map/info_bar.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/mind_map/mind_map_graph_view.dart';
 
@@ -173,22 +175,35 @@ class _InteractiveResearchMapState extends State<InteractiveResearchMap> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Interactive Research Map',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 4,
+                        margin: const EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                      Text(
+                        'Interactive Research Map',
+                        style: AppStyles.styleBold30(
+                          context,
+                        ).copyWith(color: Colors.white),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 4),
+                  SizedBox(height: 3),
                   Text(
                     'Visualize connections between research nodes',
-                    style: TextStyle(fontSize: 13, color: Color(0xFF6B7A99)),
+                    style: AppStyles.styleMedium16(
+                      context,
+                    ).copyWith(color: Color(0xFF6B7A99)),
                   ),
                 ],
               ),
