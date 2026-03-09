@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/constants/design_constants.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_details_hero_section.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_web_hero_section.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content.dart';
 
@@ -20,9 +20,9 @@ class ArticleDetailsWebLayout extends StatelessWidget {
 
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: DesignConstants.defaultPage_HP,
+                  horizontal: DesignConstants.defaultWeb_HP,
                 ),
-                child: ArticleDetailsHeroSection(
+                child: ArticleWebHeroSection(
                   title: 'MHC Diversity Across Time and Space',
                   authors: const [
                     'Cortazar‑Chinarro Maria',
@@ -46,7 +46,7 @@ class ArticleDetailsWebLayout extends StatelessWidget {
 
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: DesignConstants.defaultPage_HP,
+                  horizontal: DesignConstants.defaultWeb_HP,
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

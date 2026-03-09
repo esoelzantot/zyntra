@@ -24,16 +24,16 @@ void main() async {
   setupServiceLocator();
   Bloc.observer = SimpleBlocObserver();
   await hiveSetup();
-  // runApp(
-  //   DevicePreview(
-  //     enabled: true,
-  //     builder: (context) {
-  //       return const MyApp();
-  //     },
-  //   ),
-  // );
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) {
+        return const MyApp();
+      },
+    ),
+  );
 
-  runApp(const MyApp());
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

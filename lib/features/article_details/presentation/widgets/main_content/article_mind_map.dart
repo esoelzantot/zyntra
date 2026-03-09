@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/mind_map/info_bar.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/mind_map/map_control_button.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/mind_map/mind_map_graph_view.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/mind_map/mind_map_header.dart';
 
 // ─────────────────────────────────────────────────────────────
 // MindMap Data Model
@@ -82,7 +84,7 @@ class MarkmapParser {
         stack.removeLast();
       }
 
-      (stack.last.children as List<MindMapNode>).add(node);
+      (stack.last.children).add(node);
       stack.add(node);
     }
 
@@ -139,7 +141,9 @@ class _InteractiveResearchMapState extends State<InteractiveResearchMap> {
 
   void _collectNodes(MindMapNode node) {
     _nodeDataMap[node.id] = node;
-    for (final child in node.children) _collectNodes(child);
+    for (final child in node.children) {
+      _collectNodes(child);
+    }
   }
 
   @override
@@ -172,58 +176,10 @@ class _InteractiveResearchMapState extends State<InteractiveResearchMap> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // ── Header row ───────────────────────────────────────────
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 32,
-                        height: 4,
-                        margin: const EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-                      Text(
-                        'Interactive Research Map',
-                        style: AppStyles.styleBold30(
-                          context,
-                        ).copyWith(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 3),
-                  Text(
-                    'Visualize connections between research nodes',
-                    style: AppStyles.styleMedium16(
-                      context,
-                    ).copyWith(color: Color(0xFF6B7A99)),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                _MapControlButton(icon: Icons.zoom_in_rounded, onTap: _zoomIn),
-                const SizedBox(width: 8),
-                _MapControlButton(
-                  icon: Icons.zoom_out_rounded,
-                  onTap: _zoomOut,
-                ),
-                const SizedBox(width: 8),
-                _MapControlButton(
-                  icon: Icons.fullscreen_rounded,
-                  onTap: _openFullscreen,
-                ),
-              ],
-            ),
-          ],
+        MindMapHeader(
+          zoomIn: _zoomIn,
+          zoomOut: _zoomOut,
+          fullScreen: _openFullscreen,
         ),
 
         const SizedBox(height: 16),
@@ -349,17 +305,14 @@ class _FullscreenMindMapState extends State<_FullscreenMindMap> {
               right: 16,
               child: Row(
                 children: [
-                  _MapControlButton(
-                    icon: Icons.zoom_in_rounded,
-                    onTap: _zoomIn,
-                  ),
+                  MapControlButton(icon: Icons.zoom_in_rounded, onTap: _zoomIn),
                   const SizedBox(width: 8),
-                  _MapControlButton(
+                  MapControlButton(
                     icon: Icons.zoom_out_rounded,
                     onTap: _zoomOut,
                   ),
                   const SizedBox(width: 8),
-                  _MapControlButton(
+                  MapControlButton(
                     icon: Icons.fullscreen_exit_rounded,
                     onTap: () => Navigator.of(context).pop(),
                   ),
@@ -368,16 +321,14 @@ class _FullscreenMindMapState extends State<_FullscreenMindMap> {
             ),
 
             // ── Title (top-left) ─────────────────────────────────
-            const Positioned(
+            Positioned(
               top: 20,
               left: 16,
               child: Text(
-                'Interactive Research Map',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
+                'Research Map',
+                style: AppStyles.styleBold24(
+                  context,
+                ).copyWith(color: AppColors.primaryColor),
               ),
             ),
 
@@ -391,32 +342,6 @@ class _FullscreenMindMapState extends State<_FullscreenMindMap> {
               ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-// ─────────────────────────────────────────────────────────────
-// Control button
-// ─────────────────────────────────────────────────────────────
-class _MapControlButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
-
-  const _MapControlButton({required this.icon, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: const Color(0xFF1A2235),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Icon(icon, color: Colors.white, size: 20),
       ),
     );
   }

@@ -6,7 +6,7 @@ import 'package:zyntra/features/article_details/presentation/widgets/buttons/vie
 import 'package:zyntra/features/article_details/presentation/widgets/buttons/visit_link_button.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/hero_section/topic_chip.dart';
 
-class ArticleDetailsHeroSection extends StatelessWidget {
+class ArticleWebHeroSection extends StatelessWidget {
   final String title;
   final List<String> authors;
   final DateTime publishedDate;
@@ -15,7 +15,7 @@ class ArticleDetailsHeroSection extends StatelessWidget {
   final VoidCallback? onViewPdf;
   final VoidCallback? onVisitLink;
 
-  const ArticleDetailsHeroSection({
+  const ArticleWebHeroSection({
     super.key,
     required this.title,
     required this.authors,

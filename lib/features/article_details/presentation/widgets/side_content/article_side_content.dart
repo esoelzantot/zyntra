@@ -35,38 +35,41 @@ class ArticleSideContent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // ── Header: Icon + Title ───────────────────────────
-          Row(
-            children: [
-              // Brain / AI icon in orange
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: const Color(0xFFF97316), // orange
-                    width: 2,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              children: [
+                // Brain / AI icon in orange
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color(0xFFF97316), // orange
+                      width: 2,
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.psychology_outlined,
+                      color: const Color(0xFFF97316),
+                      size: 20,
+                    ),
                   ),
                 ),
-                child: Center(
-                  child: Icon(
-                    Icons.psychology_outlined,
-                    color: const Color(0xFFF97316),
-                    size: 20,
-                  ),
+
+                const SizedBox(width: 10),
+
+                // Title
+                Text(
+                  'Research Intelligence',
+                  style: AppStyles.styleBold22(
+                    context,
+                  ).copyWith(color: Colors.black87),
                 ),
-              ),
-
-              const SizedBox(width: 10),
-
-              // Title
-              Text(
-                'Research Intelligence',
-                style: AppStyles.styleBold22(
-                  context,
-                ).copyWith(color: Colors.black87),
-              ),
-            ],
+              ],
+            ),
           ),
 
           const SizedBox(height: 16),
