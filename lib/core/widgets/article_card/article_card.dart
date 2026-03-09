@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/buttons/custom_animated_button.dart';
@@ -30,6 +32,7 @@ class _ArticleCardState extends State<ArticleCard> {
   bool isBookmarked = false;
 
   void _onReadMore() {
+    GoRouter.of(context).push(EndPoints.articleDetailsView);
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text('Read Full Article tapped!')));
