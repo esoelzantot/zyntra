@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zyntra/core/helpers/app_transitions.dart';
 import 'package:zyntra/core/routing/end_points.dart';
+import 'package:zyntra/features/article_details/presentation/views/article_details_view.dart';
 import 'package:zyntra/features/articles/presentation/views/articles_view.dart';
 import 'package:zyntra/features/home/presentation/views/home_view.dart';
 import 'package:zyntra/features/library/presentation/views/library_view.dart';
@@ -54,16 +55,12 @@ class AppRouter {
       // ============================================================
       // Article Details View - Fade with Scale
       // ============================================================
-      // GoRoute(
-      //   path: EndPoints.articleDetailsView,
-      //   name: 'ArticleDetails',
-      //   pageBuilder: (context, state) => AppTransitions.fadeForDetails(
-      //     state.pageKey,
-      //     ArticleDetailsView(
-      //       article: state.extra,
-      //     ),
-      //   ),
-      // ),
+      GoRoute(
+        path: EndPoints.articleDetailsView,
+        name: 'ArticleDetails',
+        pageBuilder: (context, state) =>
+            AppTransitions.fadeForDetails(state.pageKey, ArticleDetailsView()),
+      ),
 
       // ============================================================
       // Asky Screen - Smooth Fade

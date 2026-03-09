@@ -4,7 +4,7 @@ import 'package:zyntra/core/utils/app_colors.dart';
 
 abstract class AppStyles {
   static const fontFamily = 'Roboto';
-  static const textHeight = 1.4;
+  static const textHeight = 1.8;
   static const letterSpacing = 1.2;
 
   // Styles 14
