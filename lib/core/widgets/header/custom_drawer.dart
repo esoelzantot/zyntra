@@ -196,6 +196,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
       case 0:
         GoRouter.of(context).push(EndPoints.homeView);
         break;
+      case 1:
+        GoRouter.of(context).push(EndPoints.askyView);
+        break;
       case 2:
         GoRouter.of(context).push(EndPoints.articlesView);
         break;
