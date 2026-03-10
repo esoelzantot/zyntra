@@ -31,7 +31,10 @@ class _ResourceCardState extends State<ResourceCard> {
         decoration: BoxDecoration(
           color: _hovered ? AppColors.bgCard : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.borderActive, width: 0.5),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.1),
+            width: 0.7,
+          ),
         ),
         child: Row(
           children: [

@@ -47,6 +47,8 @@ class _ChatInputBarState extends State<ChatInputBar> {
               // Text field
               Expanded(
                 child: TextField(
+                  minLines: 2,
+                  maxLines: 5,
                   controller: _controller,
                   style: AppStyles.styleMedium18(
                     context,

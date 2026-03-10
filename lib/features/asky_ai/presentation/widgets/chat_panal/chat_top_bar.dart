@@ -39,13 +39,6 @@ class ChatTopBar extends StatelessWidget {
             ).copyWith(color: AppColors.textPrimary),
           ),
           const Spacer(),
-          // Share button
-          _TopBarButton(
-            icon: Icons.download_rounded,
-            label: 'Print',
-            onTap: () {},
-          ),
-          const SizedBox(width: 8),
           // New Thread button
           _NewThreadButton(),
         ],
