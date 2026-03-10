@@ -4,6 +4,7 @@ import 'package:zyntra/core/helpers/app_transitions.dart';
 import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/features/article_details/presentation/views/article_details_view.dart';
 import 'package:zyntra/features/articles/presentation/views/articles_view.dart';
+import 'package:zyntra/features/asky_ai/presentation/views/asky_chat_view.dart';
 import 'package:zyntra/features/home/presentation/views/home_view.dart';
 import 'package:zyntra/features/library/presentation/views/library_view.dart';
 import 'package:zyntra/features/splash/views/splash_view.dart';
@@ -65,14 +66,12 @@ class AppRouter {
       // ============================================================
       // Asky Screen - Smooth Fade
       // ============================================================
-      // GoRoute(
-      //   path: EndPoints.askyView,
-      //   name: 'Asky View',
-      //   pageBuilder: (context, state) => AppTransitions.smoothFade(
-      //     state.pageKey,
-      //     const AskyView(),
-      //   ),
-      // ),
+      GoRoute(
+        path: EndPoints.askyView,
+        name: 'Asky View',
+        pageBuilder: (context, state) =>
+            AppTransitions.smoothFade(state.pageKey, const AskyChatView()),
+      ),
     ],
 
     // Custom error page with smooth fade
