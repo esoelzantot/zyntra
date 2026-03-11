@@ -59,6 +59,15 @@ class _ArticlesViewWebLayoutState extends State<ArticlesViewWebLayout> {
                 ),
               ),
 
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              //   child: CustomFadingWidget(
+              //     child: ArticlesLoadingGrid(
+              //       // ✅ بنمرر الـ selected categories للـ grid
+              //       selectedCategories: _selectedCategories,
+              //     ),
+              //   ),
+              // ),
               const CustomFooterHorizontal(),
             ],
           ),
