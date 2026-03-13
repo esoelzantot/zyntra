@@ -2,6 +2,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zyntra/core/constants/hive_constants.dart';
+import 'package:zyntra/core/data/entities/article_entity.dart';
 import 'package:zyntra/core/routing/router.dart';
 import 'package:zyntra/core/services/services_locator.dart';
 import 'package:zyntra/core/services/simple_bloc_observer.dart';
@@ -12,11 +14,13 @@ Future<void> hiveSetup() async {
   await Hive.initFlutter();
 
   // registering adapters
-  // Hive.registerAdapter(BookEntityAdapter());
+  Hive.registerAdapter(ArticleEntityAdapter());
 
   // opening boxes
-  // await Hive.openBox<BookEntity>(HiveConstants.FEATURED_BOOKS_BOX);
-  // await Hive.openBox<BookEntity>(HiveConstants.NEWEST_BOOKS_BOX);
+  await Hive.openBox(HiveConstants.NEWEST_ARTICLES_BOX);
+  await Hive.openBox(HiveConstants.ALL_ARTICLES_BOX);
+  await Hive.openBox(HiveConstants.ALL_THREADS_BOX);
+  await Hive.openBox(HiveConstants.SAVED_ARTICLES_BOX);
 }
 
 void main() async {
@@ -24,16 +28,7 @@ void main() async {
   setupServiceLocator();
   Bloc.observer = SimpleBlocObserver();
   await hiveSetup();
-  runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) {
-        return const MyApp();
-      },
-    ),
-  );
-
-  // runApp(const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

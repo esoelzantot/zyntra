@@ -3,7 +3,7 @@ import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
 import 'package:zyntra/features/home/presentation/widgets/hero_section/home_hero_section.dart';
 import 'package:zyntra/features/home/presentation/widgets/insight_info/insight_info_horizontal.dart';
-import 'package:zyntra/features/home/presentation/widgets/newest_articles_list/newest_horizontal_list_view.dart';
+import 'package:zyntra/features/home/presentation/widgets/newest_articles_list/newest_articles_list_view.dart';
 
 class HomeViewWebLayout extends StatelessWidget {
   const HomeViewWebLayout({super.key});
@@ -19,10 +19,10 @@ class HomeViewWebLayout extends StatelessWidget {
               HomeHeroSection(),
 
               // NewestArticles
-              NewestArticles(),
+              NewestArticlesListView(),
 
               // InsightInfo
-              SizedBox(height: 840, child: InsightInfo()),
+              SizedBox(height: 880, child: InsightInfo()),
 
               // Footer
               CustomFooterHorizontal(),

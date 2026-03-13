@@ -11,14 +11,14 @@ import 'package:zyntra/core/widgets/buttons/custom_outlined_button.dart';
 
 // ─── Newest Articles Section ─────────────────────────────────────────────────
 
-class NewestArticles extends StatefulWidget {
-  const NewestArticles({super.key});
+class NewestArticlesListView extends StatefulWidget {
+  const NewestArticlesListView({super.key});
 
   @override
-  State<NewestArticles> createState() => _NewestArticlesState();
+  State<NewestArticlesListView> createState() => _NewestArticlesListViewState();
 }
 
-class _NewestArticlesState extends State<NewestArticles> {
+class _NewestArticlesListViewState extends State<NewestArticlesListView> {
   late final ScrollController _scrollController;
   Timer? _autoScrollTimer;
   bool _isHovered = false;

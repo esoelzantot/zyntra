@@ -29,7 +29,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
       icon: Icons.library_books_rounded,
       hasArrow: false,
     ),
-    _DrawerItem(label: 'About', icon: Icons.info_rounded, hasArrow: false),
   ];
 
   @override
