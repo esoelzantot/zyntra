@@ -22,7 +22,7 @@ class HomeViewWebLayout extends StatelessWidget {
               NewestArticlesListView(),
 
               // InsightInfo
-              SizedBox(height: 840, child: InsightInfo()),
+              SizedBox(height: 880, child: InsightInfo()),
 
               // Footer
               CustomFooterHorizontal(),

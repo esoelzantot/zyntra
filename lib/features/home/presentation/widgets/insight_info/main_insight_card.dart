@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zyntra/core/config/size_config.dart';
 import 'package:zyntra/core/data/insight_info_data.dart';
+import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_assets.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 
@@ -99,7 +101,8 @@ class _MainInsightCardState extends State<MainInsightCard> {
 
                   /// CTA
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        GoRouter.of(context).push(EndPoints.askyView),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
