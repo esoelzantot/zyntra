@@ -18,7 +18,9 @@ Future<void> hiveSetup() async {
 
   // opening boxes
   await Hive.openBox(HiveConstants.NEWEST_ARTICLES_BOX);
-  // await Hive.openBox<BookEntity>(HiveConstants.NEWEST_BOOKS_BOX);
+  await Hive.openBox(HiveConstants.ALL_ARTICLES_BOX);
+  await Hive.openBox(HiveConstants.ALL_THREADS_BOX);
+  await Hive.openBox(HiveConstants.SAVED_ARTICLES_BOX);
 }
 
 void main() async {
