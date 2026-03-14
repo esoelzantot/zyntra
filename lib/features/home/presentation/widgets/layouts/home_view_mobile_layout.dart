@@ -4,7 +4,7 @@ import 'package:zyntra/core/widgets/header/custom_drawer.dart';
 import 'package:zyntra/core/widgets/header/custom_mobile_header.dart';
 import 'package:zyntra/features/home/presentation/widgets/hero_section/home_hero_section.dart';
 import 'package:zyntra/features/home/presentation/widgets/insight_info/insight_info_vertical.dart';
-import 'package:zyntra/features/home/presentation/widgets/newest_articles_list/newest_articles_list_view.dart';
+import 'package:zyntra/features/home/presentation/widgets/newest_articles_list/newest_articles_list_view_bloc_consumer.dart';
 
 class HomeViewMobileLayout extends StatefulWidget {
   const HomeViewMobileLayout({super.key});
@@ -27,7 +27,7 @@ class _HomeViewMobileLayoutState extends State<HomeViewMobileLayout> {
         CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: HomeHeroSection()),
-            SliverToBoxAdapter(child: NewestArticlesListView()),
+            SliverToBoxAdapter(child: NewestArticlesListViewBlocConsumer()),
             SliverToBoxAdapter(child: InsightInfoTablet()),
             SliverToBoxAdapter(child: CustomFooterVertical()),
           ],

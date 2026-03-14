@@ -8,6 +8,8 @@ import 'package:zyntra/core/routing/router.dart';
 import 'package:zyntra/core/services/services_locator.dart';
 import 'package:zyntra/core/services/simple_bloc_observer.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
+import 'package:zyntra/features/home/domain/use_cases/get_newest_articles_use_case.dart';
+import 'package:zyntra/features/home/presentation/cubits/newest_articles/get_newest_articles_cubit.dart';
 
 Future<void> hiveSetup() async {
   // initializing hive
@@ -28,7 +30,18 @@ void main() async {
   setupServiceLocator();
   Bloc.observer = SimpleBlocObserver();
   await hiveSetup();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetNewestArticlesCubit(
+            useCase: getIt.get<GetNewestArticlesUseCase>(),
+          )..getNewestArticles(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

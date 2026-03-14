@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/config/size_config.dart';
+import 'package:zyntra/core/data/entities/article_entity.dart';
 import 'package:zyntra/core/widgets/article_card/article_card.dart';
 
 // ─── Models ───────────────────────────────────────────────────────────────────
@@ -293,11 +294,14 @@ class _ArticlesGridState extends State<ArticlesGrid> {
       itemBuilder: (_, i) {
         final article = _pagedArticles[i];
         return ArticleCard(
-          title: article.title,
-          description: article.description,
-          category: article.categoryLabel,
-          date: article.date,
-          readTime: article.readTime,
+          article: ArticleEntity(
+            id: article.id,
+            title: article.title,
+            brief: article.description,
+            date: article.date,
+            saved: article.isBookmarked,
+            topics: ["Eslam", "Shaker"],
+          ),
           imageUrl: article.imageUrl,
         );
       },

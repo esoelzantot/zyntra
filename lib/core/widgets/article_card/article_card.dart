@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zyntra/core/data/entities/article_entity.dart';
 import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/buttons/custom_animated_button.dart';
 
 class ArticleCard extends StatefulWidget {
-  final String category;
-  final String date;
-  final String readTime;
-  final String title;
-  final String description;
+  final ArticleEntity article;
   final String imageUrl;
 
-  const ArticleCard({
-    super.key,
-    this.category = 'BIOLOGY',
-    this.date = 'JAN 12, 2024',
-    this.readTime = '8 MIN READ',
-    this.title = 'The Impact of Microgravity on DNA',
-    this.description =
-        'Recent studies aboard the ISS reveal unexpected structural variations in human telomeres when exposed to prolonged zero-G environments.',
-    this.imageUrl = 'https://picsum.photos/400/220?random=1',
-  });
+  const ArticleCard({super.key, required this.article, required this.imageUrl});
 
   @override
   State<ArticleCard> createState() => _ArticleCardState();
@@ -60,7 +48,7 @@ class _ArticleCardState extends State<ArticleCard> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
+                  Image.asset(
                     widget.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) =>
@@ -79,7 +67,7 @@ class _ArticleCardState extends State<ArticleCard> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Text(
-                        widget.category,
+                        widget.article.topics.first,
                         style: AppStyles.styleBold12(context),
                       ),
                     ),
@@ -97,7 +85,7 @@ class _ArticleCardState extends State<ArticleCard> {
                 children: [
                   // Date
                   Text(
-                    widget.date,
+                    widget.article.date,
                     style: AppStyles.styleMedium14(
                       context,
                     ).copyWith(color: const Color(0xFF64748B)),
@@ -107,7 +95,7 @@ class _ArticleCardState extends State<ArticleCard> {
 
                   // Title
                   Text(
-                    widget.title,
+                    widget.article.title,
                     style: AppStyles.styleBold22(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -117,7 +105,7 @@ class _ArticleCardState extends State<ArticleCard> {
 
                   // Description
                   Text(
-                    widget.description,
+                    widget.article.brief,
                     style: AppStyles.styleMedium16(
                       context,
                     ).copyWith(color: const Color(0xFF64748B)),

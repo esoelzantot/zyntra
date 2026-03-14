@@ -1,4 +1,4 @@
-final List<String> categories = [
+final List<String> articlesCategories = [
   "crystal structures",
   "detergents",
   "mechanosensitive channel",
