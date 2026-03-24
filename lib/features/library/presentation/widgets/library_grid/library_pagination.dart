@@ -1,10 +1,8 @@
-// lib/core/widgets/article_card/library_pagination.dart
-
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 
-class ArticlesPagination extends StatelessWidget {
-  const ArticlesPagination({
+class LibraryPagination extends StatelessWidget {
+  const LibraryPagination({
     super.key,
     required this.currentPage,
     required this.totalPages,

@@ -62,6 +62,7 @@ class ArticlesHeroSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Wrap(
+            alignment: WrapAlignment.center,
             spacing: 10, // المسافة الأفقية بين الـ chips
             runSpacing: 10, // المسافة العمودية لما يحصل wrap
             children: _categories.map((cat) {

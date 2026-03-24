@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zyntra/core/cubits/book_mark_cubit.dart';
+import 'package:zyntra/core/cubits/book_mark_state.dart';
 import 'package:zyntra/core/data/entities/article_entity.dart';
 import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
@@ -27,7 +30,7 @@ class _ArticleCardState extends State<ArticleCard> {
   }
 
   void _onBookmark() {
-    setState(() => isBookmarked = !isBookmarked);
+    context.read<BookmarkCubit>().toggleBookmark(article: widget.article);
   }
 
   @override
@@ -125,20 +128,30 @@ class _ArticleCardState extends State<ArticleCard> {
                         onTap: _onReadMore,
                         title: 'Read Full Article',
                       ),
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: _onBookmark,
-                          child: Icon(
-                            isBookmarked
-                                ? Icons.bookmark_add_rounded
-                                : Icons.bookmark_add_outlined,
-                            color: isBookmarked
-                                ? AppColors.primaryColor
-                                : const Color(0xFF999999),
-                            size: 20,
-                          ),
-                        ),
+                      BlocBuilder<BookmarkCubit, BookmarkState>(
+                        buildWhen: (prev, curr) =>
+                            prev.savedIds.contains(widget.article.id) !=
+                            curr.savedIds.contains(widget.article.id),
+                        builder: (context, state) {
+                          final isBookmarked = state.savedIds.contains(
+                            widget.article.id,
+                          );
+                          return MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: _onBookmark,
+                              child: Icon(
+                                isBookmarked
+                                    ? Icons.bookmark_add_rounded
+                                    : Icons.bookmark_add_outlined,
+                                color: isBookmarked
+                                    ? AppColors.primaryColor
+                                    : const Color(0xFF999999),
+                                size: 20,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

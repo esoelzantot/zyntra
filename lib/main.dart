@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zyntra/core/constants/hive_constants.dart';
+import 'package:zyntra/core/cubits/book_mark_cubit.dart';
 import 'package:zyntra/core/data/entities/article_entity.dart';
 import 'package:zyntra/core/routing/router.dart';
 import 'package:zyntra/core/services/services_locator.dart';
@@ -12,6 +13,11 @@ import 'package:zyntra/features/articles/domain/use_cases/get_all_articles_use_c
 import 'package:zyntra/features/articles/presentation/cubits/get_all_articles/get_all_articles_cubit.dart';
 import 'package:zyntra/features/home/domain/use_cases/get_newest_articles_use_case.dart';
 import 'package:zyntra/features/home/presentation/cubits/newest_articles/get_newest_articles_cubit.dart';
+import 'package:zyntra/features/library/data/repos/library_repo_impl.dart';
+import 'package:zyntra/features/library/domain/use_cases/get_saved_articles_use_case.dart';
+import 'package:zyntra/features/library/domain/use_cases/remove_article_use_case.dart';
+import 'package:zyntra/features/library/domain/use_cases/save_article_use_case.dart';
+import 'package:zyntra/features/library/presentation/cubits/get_saved_articles/get_saved_articles_cubit.dart';
 
 Future<void> hiveSetup() async {
   // initializing hive
@@ -45,6 +51,20 @@ void main() async {
           create: (context) =>
               GetAllArticlesCubit(useCase: getIt.get<GetAllArticlesUseCase>())
                 ..getAllArticles(page: 1),
+        ),
+
+        BlocProvider(
+          create: (context) => GetSavedArticlesCubit(
+            useCase: getIt.get<GetSavedArticlesUseCase>(),
+          )..getSavedArticles(page: 1),
+        ),
+
+        BlocProvider(
+          create: (context) => BookmarkCubit(
+            saveArticleUseCase: getIt.get<SaveArticleUseCase>(),
+            removeArticleUseCase: getIt.get<RemoveArticleUseCase>(),
+            repo: getIt.get<LibraryRepoImpl>(),
+          ),
         ),
       ],
       child: const MyApp(),
