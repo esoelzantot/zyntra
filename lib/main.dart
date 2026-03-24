@@ -8,6 +8,8 @@ import 'package:zyntra/core/routing/router.dart';
 import 'package:zyntra/core/services/services_locator.dart';
 import 'package:zyntra/core/services/simple_bloc_observer.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
+import 'package:zyntra/features/articles/domain/use_cases/get_all_articles_use_case.dart';
+import 'package:zyntra/features/articles/presentation/cubits/get_all_articles/get_all_articles_cubit.dart';
 import 'package:zyntra/features/home/domain/use_cases/get_newest_articles_use_case.dart';
 import 'package:zyntra/features/home/presentation/cubits/newest_articles/get_newest_articles_cubit.dart';
 
@@ -37,6 +39,12 @@ void main() async {
           create: (context) => GetNewestArticlesCubit(
             useCase: getIt.get<GetNewestArticlesUseCase>(),
           )..getNewestArticles(),
+        ),
+
+        BlocProvider(
+          create: (context) =>
+              GetAllArticlesCubit(useCase: getIt.get<GetAllArticlesUseCase>())
+                ..getAllArticles(page: 1),
         ),
       ],
       child: const MyApp(),

@@ -67,7 +67,9 @@ class _ArticleCardState extends State<ArticleCard> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Text(
-                        widget.article.topics.first,
+                        (widget.article.topics.isEmpty)
+                            ? "unknown"
+                            : widget.article.topics[0],
                         style: AppStyles.styleBold12(context),
                       ),
                     ),
