@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:zyntra/core/data/articles_categories.dart';
+import 'package:zyntra/core/data/entities/category_entity.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/features/articles/presentation/widgets/hero_section/category_chip.dart';
-
-// ─── Data Model ───────────────────────────────────────────────────────────────
-
-class ResearchCategory {
-  final String id;
-  final String label;
-
-  const ResearchCategory({required this.id, required this.label});
-}
 
 // ─── Widget ───────────────────────────────────────────────────────────────────
 class ArticlesHeroSection extends StatelessWidget {
@@ -20,18 +13,10 @@ class ArticlesHeroSection extends StatelessWidget {
     required this.onCategoryToggled,
   });
 
-  // ✅ بيستقبل الـ state من الـ parent
   final Set<String> selectedCategories;
   final ValueChanged<String> onCategoryToggled;
 
-  static const List<ResearchCategory> _categories = [
-    ResearchCategory(id: 'all', label: 'All Research'),
-    ResearchCategory(id: 'astrobiology', label: 'Astrobiology'),
-    ResearchCategory(id: 'genetic_engineering', label: 'Genetic Engineering'),
-    ResearchCategory(id: 'microgravity', label: 'Microgravity'),
-    ResearchCategory(id: 'life_support', label: 'Life Support'),
-    ResearchCategory(id: 'bio_informatics', label: 'Bio-Informatics'),
-  ];
+  static const List<CategoryEntity> _categories = articlesCategories;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +62,7 @@ class ArticlesHeroSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Wrap(
+            alignment: WrapAlignment.center,
             spacing: 10, // المسافة الأفقية بين الـ chips
             runSpacing: 10, // المسافة العمودية لما يحصل wrap
             children: _categories.map((cat) {

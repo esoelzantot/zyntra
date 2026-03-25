@@ -1,23 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A pulsing opacity wrapper used as a skeleton/loading placeholder.
-///
-/// Usage:
-/// ```dart
-/// // Wrap any placeholder shape:
-/// CustomFadingWidget(
-///   child: Container(
-///     width: double.infinity,
-///     height: 16,
-///     decoration: ShimmerTheme.box(),
-///   ),
-/// )
-///
-/// // Or use the ready-made helpers:
-/// CustomFadingWidget.line(width: 200)
-/// CustomFadingWidget.box(height: 120)
-/// CustomFadingWidget.circle(radius: 24)
-/// ```
 class CustomFadingWidget extends StatefulWidget {
   const CustomFadingWidget({
     super.key,

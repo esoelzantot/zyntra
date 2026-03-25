@@ -25,4 +25,33 @@ class LibraryRepoImpl implements LibraryRepo {
       return left(ServerFailure(e.toString(), 400));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> saveArticle({
+    required ArticleEntity article,
+  }) async {
+    try {
+      await local.saveArticle(article: article);
+      return right(unit);
+    } catch (e) {
+      return left(ServerFailure(e.toString(), 400));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> removeArticle({
+    required String articleId,
+  }) async {
+    try {
+      await local.removeArticle(articleId: articleId);
+      return right(unit);
+    } catch (e) {
+      return left(ServerFailure(e.toString(), 400));
+    }
+  }
+
+  @override
+  bool isArticleSaved({required String articleId}) {
+    return local.isArticleSaved(articleId: articleId);
+  }
 }

@@ -58,15 +58,6 @@ class _LibraryViewWebLayoutState extends State<LibraryViewWebLayout> {
                 ),
               ),
 
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              //   child: CustomFadingWidget(
-              //     child: LibraryLoadingGrid(
-              //       // ✅ بنمرر الـ selected categories للـ grid
-              //       selectedCategories: _selectedCategories,
-              //     ),
-              //   ),
-              // ),
               const CustomFooterHorizontal(),
             ],
           ),

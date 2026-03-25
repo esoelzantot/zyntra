@@ -27,6 +27,12 @@ abstract class IArticlesCacheService {
 
   String? getArticleMap({required String id});
 
+  // ✅ جديد — للـ Library
+  Future<void> saveArticle({required ArticleEntity article});
+  Future<void> removeArticle({required String articleId});
+  List<ArticleEntity> getAllSavedArticles();
+  bool isArticleSaved({required String articleId});
+
   Future<void> clearAll();
 }
 
@@ -44,6 +50,8 @@ class ArticlesCacheService implements IArticlesCacheService {
   String _articleAnalysisKey(String id) => 'article_analysis_$id';
 
   String _articleMapKey(String id) => 'article_map_$id';
+
+  static const String _savedKey = 'saved_articles';
 
   Box get _box => Hive.box(boxName);
 
@@ -101,6 +109,36 @@ class ArticlesCacheService implements IArticlesCacheService {
     final cached = _box.get(_articleMapKey(id));
     if (cached == null) return null;
     return cached;
+  }
+
+  @override
+  Future<void> saveArticle({required ArticleEntity article}) async {
+    final saved = getAllSavedArticles();
+    // ✅ متضيفش لو موجودة أصلاً
+    final exists = saved.any((a) => a.id == article.id);
+    if (!exists) {
+      saved.add(article);
+      await _box.put(_savedKey, saved);
+    }
+  }
+
+  @override
+  Future<void> removeArticle({required String articleId}) async {
+    final saved = getAllSavedArticles();
+    saved.removeWhere((a) => a.id == articleId);
+    await _box.put(_savedKey, saved);
+  }
+
+  @override
+  List<ArticleEntity> getAllSavedArticles() {
+    final cached = _box.get(_savedKey);
+    if (cached == null) return [];
+    return List<ArticleEntity>.from(cached);
+  }
+
+  @override
+  bool isArticleSaved({required String articleId}) {
+    return getAllSavedArticles().any((a) => a.id == articleId);
   }
 
   @override

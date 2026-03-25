@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zyntra/core/cubits/book_mark_cubit.dart';
+import 'package:zyntra/core/cubits/book_mark_state.dart';
+import 'package:zyntra/core/data/entities/article_entity.dart';
 import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/buttons/custom_animated_button.dart';
+import 'package:zyntra/features/article_details/presentation/cubits/get_article_analysis/get_article_analysis_cubit.dart';
+import 'package:zyntra/features/article_details/presentation/cubits/get_article_data/get_article_data_cubit.dart';
 
 class ArticleCard extends StatefulWidget {
-  final String category;
-  final String date;
-  final String readTime;
-  final String title;
-  final String description;
+  final ArticleEntity article;
   final String imageUrl;
 
-  const ArticleCard({
-    super.key,
-    this.category = 'BIOLOGY',
-    this.date = 'JAN 12, 2024',
-    this.readTime = '8 MIN READ',
-    this.title = 'The Impact of Microgravity on DNA',
-    this.description =
-        'Recent studies aboard the ISS reveal unexpected structural variations in human telomeres when exposed to prolonged zero-G environments.',
-    this.imageUrl = 'https://picsum.photos/400/220?random=1',
-  });
+  const ArticleCard({super.key, required this.article, required this.imageUrl});
 
   @override
   State<ArticleCard> createState() => _ArticleCardState();
@@ -32,14 +25,15 @@ class _ArticleCardState extends State<ArticleCard> {
   bool isBookmarked = false;
 
   void _onReadMore() {
+    context.read<GetArticleDataCubit>().getArticleData(id: widget.article.id);
+    context.read<GetArticleAnalysisCubit>().getArticleAnalysis(
+      id: widget.article.id,
+    );
     GoRouter.of(context).push(EndPoints.articleDetailsView);
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Read Full Article tapped!')));
   }
 
   void _onBookmark() {
-    setState(() => isBookmarked = !isBookmarked);
+    context.read<BookmarkCubit>().toggleBookmark(article: widget.article);
   }
 
   @override
@@ -60,7 +54,7 @@ class _ArticleCardState extends State<ArticleCard> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
+                  Image.asset(
                     widget.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) =>
@@ -79,7 +73,9 @@ class _ArticleCardState extends State<ArticleCard> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Text(
-                        widget.category,
+                        (widget.article.topics.isEmpty)
+                            ? "unknown"
+                            : widget.article.topics[0],
                         style: AppStyles.styleBold12(context),
                       ),
                     ),
@@ -97,7 +93,7 @@ class _ArticleCardState extends State<ArticleCard> {
                 children: [
                   // Date
                   Text(
-                    widget.date,
+                    widget.article.date,
                     style: AppStyles.styleMedium14(
                       context,
                     ).copyWith(color: const Color(0xFF64748B)),
@@ -107,7 +103,7 @@ class _ArticleCardState extends State<ArticleCard> {
 
                   // Title
                   Text(
-                    widget.title,
+                    widget.article.title,
                     style: AppStyles.styleBold22(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -117,7 +113,7 @@ class _ArticleCardState extends State<ArticleCard> {
 
                   // Description
                   Text(
-                    widget.description,
+                    widget.article.brief,
                     style: AppStyles.styleMedium16(
                       context,
                     ).copyWith(color: const Color(0xFF64748B)),
@@ -135,20 +131,30 @@ class _ArticleCardState extends State<ArticleCard> {
                         onTap: _onReadMore,
                         title: 'Read Full Article',
                       ),
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: _onBookmark,
-                          child: Icon(
-                            isBookmarked
-                                ? Icons.bookmark_add_rounded
-                                : Icons.bookmark_add_outlined,
-                            color: isBookmarked
-                                ? AppColors.primaryColor
-                                : const Color(0xFF999999),
-                            size: 20,
-                          ),
-                        ),
+                      BlocBuilder<BookmarkCubit, BookmarkState>(
+                        buildWhen: (prev, curr) =>
+                            prev.savedIds.contains(widget.article.id) !=
+                            curr.savedIds.contains(widget.article.id),
+                        builder: (context, state) {
+                          final isBookmarked = state.savedIds.contains(
+                            widget.article.id,
+                          );
+                          return MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: _onBookmark,
+                              child: Icon(
+                                isBookmarked
+                                    ? Icons.bookmark_add_rounded
+                                    : Icons.bookmark_add_outlined,
+                                color: isBookmarked
+                                    ? AppColors.primaryColor
+                                    : const Color(0xFF999999),
+                                size: 20,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

@@ -1,30 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:zyntra/core/functions/launch_url.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/custom_divider.dart';
+import 'package:zyntra/features/article_details/domain/entities/article_data_entity.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/buttons/view_pdf_button.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/buttons/visit_link_button.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/hero_section/topic_chip.dart';
 
 class ArticleMobileHeroSection extends StatelessWidget {
-  final String title;
-  final List<String> authors;
-  final DateTime publishedDate;
-  final String publisherName;
-  final List<String> topics;
-  final VoidCallback? onViewPdf;
-  final VoidCallback? onVisitLink;
+  final ArticleDataEntity articleData;
 
-  const ArticleMobileHeroSection({
-    super.key,
-    required this.title,
-    required this.authors,
-    required this.publishedDate,
-    required this.publisherName,
-    required this.topics,
-    this.onViewPdf,
-    this.onVisitLink,
-  });
+  const ArticleMobileHeroSection({super.key, required this.articleData});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +20,7 @@ class ArticleMobileHeroSection extends StatelessWidget {
       children: [
         // ── Title ──────────────────────────────────────────────
         Text(
-          title,
+          articleData.title,
           style: AppStyles.styleBold36(
             context,
           ).copyWith(fontWeight: FontWeight.w900, fontSize: 44),
@@ -51,9 +38,13 @@ class ArticleMobileHeroSection extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ViewPdfButton(onPressed: onViewPdf),
+                  ViewPdfButton(
+                    onPressed: () => launchUrlFunc(articleData.pdf),
+                  ),
                   const SizedBox(width: 12),
-                  VisitLinkButton(onPressed: onVisitLink),
+                  VisitLinkButton(
+                    onPressed: () => launchUrlFunc(articleData.link),
+                  ),
                 ],
               ),
             ),
@@ -65,7 +56,7 @@ class ArticleMobileHeroSection extends StatelessWidget {
               children: [
                 // Authors
                 Text(
-                  authors.join(', '),
+                  articleData.authors.join(', '),
                   style: AppStyles.styleMedium20(
                     context,
                   ).copyWith(color: AppColors.primaryColor),
@@ -81,7 +72,7 @@ class ArticleMobileHeroSection extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'Published ${_formatDate(publishedDate)}',
+                      'Published ${articleData.date}',
                       style: AppStyles.styleMedium16(
                         context,
                       ).copyWith(color: AppColors.subTextColor),
@@ -99,7 +90,7 @@ class ArticleMobileHeroSection extends StatelessWidget {
         Wrap(
           spacing: 10,
           runSpacing: 10,
-          children: topics
+          children: articleData.topics
               .asMap()
               .entries
               .map((e) => TopicChip(label: e.value, index: e.key))

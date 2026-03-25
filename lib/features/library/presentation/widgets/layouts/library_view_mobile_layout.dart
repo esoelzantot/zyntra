@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_vertical.dart';
 import 'package:zyntra/core/widgets/header/custom_drawer.dart';
 import 'package:zyntra/core/widgets/header/custom_mobile_header.dart';
-import 'package:zyntra/features/articles/presentation/widgets/articles_grid/articles_grid.dart';
-import 'package:zyntra/features/articles/presentation/widgets/hero_section/articles_hero_section.dart';
+import 'package:zyntra/features/library/presentation/widgets/hero_section/library_hero_section.dart';
+import 'package:zyntra/features/library/presentation/widgets/library_grid/library_grid.dart';
 
 class LibraryViewMobileLayout extends StatefulWidget {
   const LibraryViewMobileLayout({super.key});
@@ -51,7 +51,7 @@ class _LibraryViewMobileLayoutState extends State<LibraryViewMobileLayout> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: ArticlesHeroSection(
+                child: LibraryHeroSection(
                   // ✅ بنمرر الـ state والـ callback
                   selectedCategories: _selectedCategories,
                   onCategoryToggled: _onCategoryToggled,
@@ -60,7 +60,7 @@ class _LibraryViewMobileLayoutState extends State<LibraryViewMobileLayout> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: ArticlesGrid(
+                child: LibraryGrid(
                   // ✅ بنمرر الـ selected categories للـ grid
                   selectedCategories: _selectedCategories,
                 ),

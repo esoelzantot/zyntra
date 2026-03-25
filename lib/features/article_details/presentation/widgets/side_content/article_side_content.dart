@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zyntra/core/data/article_dummy_data.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/custom_divider.dart';
+import 'package:zyntra/features/article_details/domain/entities/article_analysis_entity.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/key_findings.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/open_questions.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/relevant_fields.dart';
@@ -13,7 +13,8 @@ import 'package:zyntra/features/article_details/presentation/widgets/side_conten
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/statistical_significance.dart';
 
 class ArticleSideContent extends StatelessWidget {
-  const ArticleSideContent({super.key});
+  final ArticleAnalysisEntity analysis;
+  const ArticleSideContent({super.key, required this.analysis});
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +79,15 @@ class ArticleSideContent extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          ResearchQuestion(question: ArticleDummyData.researchQuestion),
+          ResearchQuestion(question: analysis.question),
 
           const SizedBox(height: 24),
 
-          StatisticalSignificance(
-            body: ArticleDummyData.statisticalSignificance,
-          ),
+          StatisticalSignificance(body: analysis.significance),
 
           const SizedBox(height: 24),
 
-          RelevantFields(fields: ArticleDummyData.relevantFields),
+          RelevantFields(fields: analysis.fields),
 
           const SizedBox(height: 16),
 
@@ -96,19 +95,19 @@ class ArticleSideContent extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          OpenQuestions(questions: ArticleDummyData.openQuestions),
+          OpenQuestions(questions: analysis.openQuestions),
 
           const SizedBox(height: 24),
 
-          KeyFindings(findings: ArticleDummyData.keyFindings),
+          KeyFindings(findings: analysis.keyFindings),
 
           const SizedBox(height: 24),
 
-          ResearchImplications(implications: ArticleDummyData.implications),
+          ResearchImplications(implications: analysis.implications),
 
           const SizedBox(height: 24),
 
-          ResearchLimitations(limitations: ArticleDummyData.limitations),
+          ResearchLimitations(limitations: analysis.limitations),
 
           const SizedBox(height: 16),
 
@@ -116,11 +115,11 @@ class ArticleSideContent extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          ResearchMethodology(methodology: ArticleDummyData.methodologies),
+          ResearchMethodology(methodology: analysis.methodologies),
 
           const SizedBox(height: 24),
 
-          ResearchMechanisms(mechanisms: ArticleDummyData.mechanisms),
+          ResearchMechanisms(mechanisms: analysis.mechanisms),
         ],
       ),
     );

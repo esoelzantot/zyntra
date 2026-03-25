@@ -24,6 +24,8 @@ import 'package:zyntra/features/home/domain/use_cases/get_newest_articles_use_ca
 import 'package:zyntra/features/library/data/data_sources/local/library_local_data_source_impl.dart';
 import 'package:zyntra/features/library/data/repos/library_repo_impl.dart';
 import 'package:zyntra/features/library/domain/use_cases/get_saved_articles_use_case.dart';
+import 'package:zyntra/features/library/domain/use_cases/remove_article_use_case.dart';
+import 'package:zyntra/features/library/domain/use_cases/save_article_use_case.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -99,6 +101,14 @@ void setupServiceLocator() {
 
   getIt.registerSingleton<GetSavedArticlesUseCase>(
     GetSavedArticlesUseCase(repo: getIt.get<LibraryRepoImpl>()),
+  );
+
+  getIt.registerSingleton<SaveArticleUseCase>(
+    SaveArticleUseCase(repo: getIt.get<LibraryRepoImpl>()),
+  );
+
+  getIt.registerSingleton<RemoveArticleUseCase>(
+    RemoveArticleUseCase(repo: getIt.get<LibraryRepoImpl>()),
   );
 
   // ARTICLE DETAILS FEATURE

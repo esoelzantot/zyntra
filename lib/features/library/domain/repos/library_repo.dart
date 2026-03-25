@@ -6,4 +6,9 @@ abstract class LibraryRepo {
   Future<Either<Failure, List<ArticleEntity>>> getSavedArticles({
     required int page,
   });
+
+  // ✅ جديد
+  Future<Either<Failure, Unit>> saveArticle({required ArticleEntity article});
+  Future<Either<Failure, Unit>> removeArticle({required String articleId});
+  bool isArticleSaved({required String articleId});
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
-import 'package:zyntra/features/articles/presentation/widgets/articles_grid/articles_grid.dart';
-import 'package:zyntra/features/articles/presentation/widgets/hero_section/articles_hero_section.dart';
+import 'package:zyntra/features/library/presentation/widgets/hero_section/library_hero_section.dart';
+import 'package:zyntra/features/library/presentation/widgets/library_grid/library_grid.dart';
 
 class LibraryViewTabletLayout extends StatefulWidget {
   const LibraryViewTabletLayout({super.key});
@@ -45,7 +45,7 @@ class _LibraryViewTabletLayoutState extends State<LibraryViewTabletLayout> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: ArticlesHeroSection(
+                child: LibraryHeroSection(
                   // ✅ بنمرر الـ state والـ callback
                   selectedCategories: _selectedCategories,
                   onCategoryToggled: _onCategoryToggled,
@@ -54,7 +54,7 @@ class _LibraryViewTabletLayoutState extends State<LibraryViewTabletLayout> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: ArticlesGrid(
+                child: LibraryGrid(
                   // ✅ بنمرر الـ selected categories للـ grid
                   selectedCategories: _selectedCategories,
                 ),
