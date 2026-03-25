@@ -1,3 +1,5 @@
+import 'package:zyntra/core/functions/significant_findings_parser.dart';
+import 'package:zyntra/core/functions/summary_parser.dart';
 import 'package:zyntra/features/article_details/domain/entities/article_data_entity.dart';
 
 class ArticleDataModel extends ArticleDataEntity {
@@ -63,18 +65,10 @@ class ArticleDataModel extends ArticleDataEntity {
                   .toList()
             : [],
         significantFindings: json['significant'] != null
-            ? (json['significant'] as String)
-                  .split('\n')
-                  .map((e) => e.trim())
-                  .where((e) => e.isNotEmpty)
-                  .toList()
+            ? _significantParser(json['significant'] as String)
             : [],
         summary: json['summary'] != null
-            ? (json['summary'] as String)
-                  .split('\n')
-                  .map((e) => e.trim())
-                  .where((e) => e.isNotEmpty)
-                  .toList()
+            ? _summaryParser(json['summary'] as String)
             : [],
       );
 
@@ -92,4 +86,12 @@ class ArticleDataModel extends ArticleDataEntity {
     'summary': summary.join('\n'),
     'conclusion': conclusion,
   };
+
+  static List<String> _summaryParser(String raw) {
+    return SummaryParser.parseBullets(raw);
+  }
+
+  static List<String> _significantParser(String raw) {
+    return SignificantFindingsParser.parse(raw);
+  }
 }

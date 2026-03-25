@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:zyntra/core/constants/design_constants.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_web_hero_section.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_web_hero_bloc_consumer.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content_bloc_consumer.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content.dart';
 
 class ArticleDetailsWebLayout extends StatelessWidget {
@@ -22,24 +22,7 @@ class ArticleDetailsWebLayout extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: DesignConstants.defaultWeb_HP,
                 ),
-                child: ArticleWebHeroSection(
-                  title: 'MHC Diversity Across Time and Space',
-                  authors: const [
-                    'Cortazar‑Chinarro Maria',
-                    'King Kayla C.',
-                    'Lillie Mette',
-                  ],
-                  publishedDate: DateTime(2025, 4, 28),
-                  publisherName: 'Nature Genetics Review',
-                  topics: const [
-                    'Conservation Biology',
-                    'Evolutionary Biology',
-                    'Population Genetics',
-                    'Immunogenetics',
-                  ],
-                  onViewPdf: () => debugPrint('View PDF tapped'),
-                  onVisitLink: () => debugPrint('Visit Live Link tapped'),
-                ),
+                child: ArticleWebHeroBlocConsumer(),
               ),
 
               SizedBox(height: 32),
@@ -51,7 +34,7 @@ class ArticleDetailsWebLayout extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(flex: 2, child: ArticleMainContent()),
+                    Expanded(flex: 2, child: ArticleMainContentBlocConsumer()),
                     const SizedBox(width: 48),
                     Expanded(flex: 1, child: ArticleSideContent()),
                   ],

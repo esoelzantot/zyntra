@@ -137,6 +137,7 @@ class _InteractiveResearchMapState extends State<InteractiveResearchMap> {
     _root = MarkmapParser.parse(widget.markmapText);
     _nodeDataMap = {};
     _collectNodes(_root);
+    _centerCanvas();
   }
 
   void _collectNodes(MindMapNode node) {
@@ -144,6 +145,35 @@ class _InteractiveResearchMapState extends State<InteractiveResearchMap> {
     for (final child in node.children) {
       _collectNodes(child);
     }
+  }
+
+  // Centers the canvas so the root node starts in view
+  void _centerCanvas() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      const double canvasSize = 1300.0;
+      const double visibleHeight = 350.0;
+      const double visibleWidth = 350.0; // approximate screen width fallback
+
+      final screenWidth =
+          WidgetsBinding
+              .instance
+              .platformDispatcher
+              .views
+              .first
+              .physicalSize
+              .width /
+          WidgetsBinding
+              .instance
+              .platformDispatcher
+              .views
+              .first
+              .devicePixelRatio;
+
+      final offsetX = (canvasSize - screenWidth) / 2;
+      final offsetY = (canvasSize - visibleHeight) / 2;
+
+      _controller.value = Matrix4.identity()..translate(-offsetX, -offsetY);
+    });
   }
 
   @override
@@ -197,28 +227,34 @@ class _InteractiveResearchMapState extends State<InteractiveResearchMap> {
             borderRadius: BorderRadius.circular(16),
             child: Container(
               color: const Color(0xFF111827),
-              child: InteractiveViewer(
-                transformationController: _controller,
-                constrained: false,
-                boundaryMargin: const EdgeInsets.all(500),
-                minScale: _minScale,
-                maxScale: _maxScale,
-                onInteractionUpdate: (_) {
-                  setState(() {
-                    _currentScale = _controller.value.getMaxScaleOnAxis().clamp(
-                      _minScale,
-                      _maxScale,
-                    );
-                  });
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return InteractiveViewer(
+                    transformationController: _controller,
+                    constrained: false,
+                    boundaryMargin: const EdgeInsets.all(500),
+                    minScale: _minScale,
+                    maxScale: _maxScale,
+                    onInteractionUpdate: (_) {
+                      setState(() {
+                        _currentScale = _controller.value
+                            .getMaxScaleOnAxis()
+                            .clamp(_minScale, _maxScale);
+                      });
+                    },
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: MindMapGraphView(
+                        root: _root,
+                        nodeDataMap: _nodeDataMap,
+                        selectedNodeId: _selectedNodeId,
+                        onNodeTap: (id) => setState(() {
+                          _selectedNodeId = _selectedNodeId == id ? null : id;
+                        }),
+                      ),
+                    ),
+                  );
                 },
-                child: MindMapGraphView(
-                  root: _root,
-                  nodeDataMap: _nodeDataMap,
-                  selectedNodeId: _selectedNodeId,
-                  onNodeTap: (id) => setState(() {
-                    _selectedNodeId = _selectedNodeId == id ? null : id;
-                  }),
-                ),
               ),
             ),
           ),
@@ -288,13 +324,16 @@ class _FullscreenMindMapState extends State<_FullscreenMindMap> {
                     );
                   });
                 },
-                child: MindMapGraphView(
-                  root: widget.root,
-                  nodeDataMap: widget.nodeDataMap,
-                  selectedNodeId: _selectedNodeId,
-                  onNodeTap: (id) => setState(() {
-                    _selectedNodeId = _selectedNodeId == id ? null : id;
-                  }),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: MindMapGraphView(
+                    root: widget.root,
+                    nodeDataMap: widget.nodeDataMap,
+                    selectedNodeId: _selectedNodeId,
+                    onNodeTap: (id) => setState(() {
+                      _selectedNodeId = _selectedNodeId == id ? null : id;
+                    }),
+                  ),
                 ),
               ),
             ),

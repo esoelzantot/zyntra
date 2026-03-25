@@ -3,8 +3,8 @@ import 'package:zyntra/core/constants/design_constants.dart';
 import 'package:zyntra/core/widgets/footer/custom_footer_vertical.dart';
 import 'package:zyntra/core/widgets/header/custom_drawer.dart';
 import 'package:zyntra/core/widgets/header/custom_mobile_header.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_mobile_hero_section.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_mobile_hero_bloc_consumer.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content_bloc_consumer.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content.dart';
 
 class ArticleDetailsMobileLayout extends StatefulWidget {
@@ -58,24 +58,7 @@ class _ArticleDetailsMobileLayoutState extends State<ArticleDetailsMobileLayout>
                     padding: EdgeInsets.symmetric(
                       horizontal: DesignConstants.defaultMobile_HP,
                     ),
-                    child: ArticleMobileHeroSection(
-                      title: 'MHC Diversity Across Time and Space',
-                      authors: const [
-                        'Cortazar‑Chinarro Maria',
-                        'King Kayla C.',
-                        'Lillie Mette',
-                      ],
-                      publishedDate: DateTime(2025, 4, 28),
-                      publisherName: 'Nature Genetics Review',
-                      topics: const [
-                        'Conservation Biology',
-                        'Evolutionary Biology',
-                        'Population Genetics',
-                        'Immunogenetics',
-                      ],
-                      onViewPdf: () => debugPrint('View PDF tapped'),
-                      onVisitLink: () => debugPrint('Visit Live Link tapped'),
-                    ),
+                    child: ArticleMobileHeroBlocConsumer(),
                   ),
                 ],
               ),
@@ -104,7 +87,7 @@ class _ArticleDetailsMobileLayoutState extends State<ArticleDetailsMobileLayout>
                         horizontal: DesignConstants.defaultMobile_HP,
                         vertical: DesignConstants.defaultMobile_VP,
                       ),
-                      child: const ArticleMainContent(),
+                      child: const ArticleMainContentBlocConsumer(),
                     ),
                     const CustomFooterVertical(),
                   ],
