@@ -59,7 +59,7 @@ class _FindingItem extends StatelessWidget {
         children: [
           // ── Index ────────────────────────────────────────
           Text(
-            '0$index',
+            (index < 10) ? '0$index' : '$index',
             style: AppStyles.styleBold24(
               context,
             ).copyWith(color: const Color(0xFFF97316)),

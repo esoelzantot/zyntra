@@ -4,7 +4,7 @@ import 'package:zyntra/core/widgets/footer/custom_footer_horizontal.dart';
 import 'package:zyntra/core/widgets/header/custom_web_header.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_web_hero_bloc_consumer.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content_bloc_consumer.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content_bloc_consumer.dart';
 
 class ArticleDetailsWebLayout extends StatelessWidget {
   const ArticleDetailsWebLayout({super.key});
@@ -36,7 +36,7 @@ class ArticleDetailsWebLayout extends StatelessWidget {
                   children: [
                     Expanded(flex: 2, child: ArticleMainContentBlocConsumer()),
                     const SizedBox(width: 48),
-                    Expanded(flex: 1, child: ArticleSideContent()),
+                    Expanded(flex: 1, child: ArticleSideContentBlocConsumer()),
                   ],
                 ),
               ),

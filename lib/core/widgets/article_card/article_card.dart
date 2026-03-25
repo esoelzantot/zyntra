@@ -8,6 +8,7 @@ import 'package:zyntra/core/routing/end_points.dart';
 import 'package:zyntra/core/utils/app_colors.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
 import 'package:zyntra/core/widgets/buttons/custom_animated_button.dart';
+import 'package:zyntra/features/article_details/presentation/cubits/get_article_analysis/get_article_analysis_cubit.dart';
 import 'package:zyntra/features/article_details/presentation/cubits/get_article_data/get_article_data_cubit.dart';
 
 class ArticleCard extends StatefulWidget {
@@ -25,6 +26,9 @@ class _ArticleCardState extends State<ArticleCard> {
 
   void _onReadMore() {
     context.read<GetArticleDataCubit>().getArticleData(id: widget.article.id);
+    context.read<GetArticleAnalysisCubit>().getArticleAnalysis(
+      id: widget.article.id,
+    );
     GoRouter.of(context).push(EndPoints.articleDetailsView);
   }
 

@@ -4,7 +4,7 @@ import 'package:zyntra/core/widgets/footer/custom_footer_vertical.dart';
 import 'package:zyntra/core/widgets/header/custom_mobile_header.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/hero_section/article_mobile_hero_bloc_consumer.dart';
 import 'package:zyntra/features/article_details/presentation/widgets/main_content/article_main_content_bloc_consumer.dart';
-import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content.dart';
+import 'package:zyntra/features/article_details/presentation/widgets/side_content/article_side_content_bloc_consumer.dart';
 
 class ArticleDetailsTabletLayout extends StatefulWidget {
   const ArticleDetailsTabletLayout({super.key});
@@ -97,7 +97,7 @@ class _ArticleDetailsTabletLayoutState extends State<ArticleDetailsTabletLayout>
                         horizontal: DesignConstants.defaultMobile_HP,
                         vertical: DesignConstants.defaultMobile_VP,
                       ),
-                      child: const ArticleSideContent(),
+                      child: const ArticleSideContentBlocConsumer(),
                     ),
                     const CustomFooterVertical(),
                   ],
