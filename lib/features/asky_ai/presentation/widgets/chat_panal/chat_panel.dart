@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/data/asky_dummy_data.dart';
 import 'chat_input_bar.dart';
 import 'chat_messages_list.dart';
 import 'chat_top_bar.dart';
@@ -14,7 +13,6 @@ class ChatPanel extends StatefulWidget {
 
 class _ChatPanelState extends State<ChatPanel> {
   final _scrollController = ScrollController();
-  final _messages = SampleData.messages;
 
   @override
   void dispose() {
@@ -27,12 +25,7 @@ class _ChatPanelState extends State<ChatPanel> {
     return Column(
       children: [
         const ChatTopBar(),
-        Expanded(
-          child: ChatMessagesList(
-            messages: _messages,
-            scrollController: _scrollController,
-          ),
-        ),
+        Expanded(child: ChatMessagesList(scrollController: _scrollController)),
         const ChatInputBar(),
       ],
     );

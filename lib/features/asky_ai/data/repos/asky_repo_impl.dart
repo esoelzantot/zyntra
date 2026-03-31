@@ -5,7 +5,6 @@ import 'package:zyntra/features/asky_ai/data/data_sources/local/asky_local_data_
 import 'package:zyntra/features/asky_ai/data/data_sources/remote/asky_remote_data_source_impl.dart';
 import 'package:zyntra/features/asky_ai/domain/entities/message_entity.dart';
 import 'package:zyntra/features/asky_ai/domain/entities/query_entity.dart';
-import 'package:zyntra/features/asky_ai/domain/entities/thread_entity.dart';
 import 'package:zyntra/features/asky_ai/domain/repos/asky_repo.dart';
 
 class AskyRepoImpl implements AskyRepo {
@@ -15,17 +14,10 @@ class AskyRepoImpl implements AskyRepo {
   AskyRepoImpl({required this.remote, required this.local});
 
   @override
-  Future<Either<Failure, List<ThreadEntity>>> getAllThreads({
-    required int page,
-  }) async {
-    // TODO: implement getAllThreads
+  Future<Either<Failure, List<MessageEntity>>> getAllMessages() async {
     try {
-      List<ThreadEntity> localThreads = await local.getAllThreads(page: page);
-      if (localThreads.isNotEmpty) {
-        return right(localThreads);
-      } else {
-        return right([]);
-      }
+      final List<MessageEntity> messages = await local.getAllMessages();
+      return right(messages);
     } on DioException catch (e) {
       return left(ServerFailure.fromDioError(e));
     } catch (e) {
@@ -37,13 +29,16 @@ class AskyRepoImpl implements AskyRepo {
   Future<Either<Failure, MessageEntity>> sendQuery({
     required QueryEntity query,
   }) async {
-    // TODO: implement sendQuery
     try {
-      MessageEntity? message = await remote.sendQuery(query: query);
+      final MessageEntity message = await remote.sendQuery(query: query);
       return right(message);
-    } on DioException catch (e) {
+    } on DioException catch (e, trace) {
+      print(e);
+      print(trace);
       return left(ServerFailure.fromDioError(e));
-    } catch (e) {
+    } catch (e, trace) {
+      print(e);
+      print(trace);
       return left(ServerFailure(e.toString(), 400));
     }
   }

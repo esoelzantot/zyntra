@@ -259,12 +259,7 @@ class _SessionPageState extends State<_SessionPage> {
         // ChatTopBar is intentionally omitted here — the AppBar above handles it.
         // If you still want per-session actions, keep ChatTopBar:
         // const ChatTopBar(),
-        Expanded(
-          child: ChatMessagesList(
-            messages: _messages,
-            scrollController: _scrollController,
-          ),
-        ),
+        Expanded(child: ChatMessagesList(scrollController: _scrollController)),
         const ChatInputBar(),
       ],
     );

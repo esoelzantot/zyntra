@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/message_entity.dart';
 
 import '../../../../../app_theme.dart';
-import '../../../../../core/data/asky_dummy_data.dart';
 
 class UserMessageBubble extends StatelessWidget {
-  final UserMessage message;
+  final MessageEntity message;
 
   const UserMessageBubble({super.key, required this.message});
 
@@ -37,7 +37,7 @@ class UserMessageBubble extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    message.text,
+                    message.content,
                     style: AppStyles.styleRegular16(
                       context,
                     ).copyWith(color: Colors.white),
@@ -47,7 +47,7 @@ class UserMessageBubble extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 6, right: 2),
                   child: Text(
-                    '${message.sender} · ${message.time}',
+                    '${message.role} · ${message.date}',
                     style: AppStyles.styleSemiBold14(
                       context,
                     ).copyWith(color: AppColors.textMuted),

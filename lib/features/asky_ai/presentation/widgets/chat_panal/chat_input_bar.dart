@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
+import 'package:zyntra/core/helpers/custom_loading_indicator.dart';
+import 'package:zyntra/core/helpers/custom_snack_bar.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/query_entity.dart';
+import 'package:zyntra/features/asky_ai/presentation/cubits/send_query/send_query_cubit.dart';
 
 import '../../../../../app_theme.dart';
 
@@ -67,7 +73,24 @@ class _ChatInputBarState extends State<ChatInputBar> {
 
               const SizedBox(width: 8),
               // Send button
-              _SendButton(active: _hasText, onTap: _send),
+              BlocConsumer<SendQueryCubit, SendQueryState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                  if (state is SendQuerySuccess) {
+                    CustomSnackBar.showWarning(context, state.message.content);
+                  }
+
+                  if (state is SendQueryFailure) {
+                    CustomSnackBar.showError(context, state.message);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SendQueryLoading) {
+                    return Center(child: CustomLoadingIndicator());
+                  }
+                  return _SendButton(active: _hasText, onTap: _send);
+                },
+              ),
             ],
           ),
         ),
@@ -78,7 +101,12 @@ class _ChatInputBarState extends State<ChatInputBar> {
 
   void _send() {
     if (_hasText) {
+      QueryEntity query = QueryEntity(message: _controller.text);
+      context.read<SendQueryCubit>().sendQuery(query: query);
+      FocusScope.of(context).unfocus();
+      Logger().i({'message': query.message});
       _controller.clear();
+      setState(() => _hasText = false);
     }
   }
 }

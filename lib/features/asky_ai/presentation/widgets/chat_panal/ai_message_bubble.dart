@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/message_entity.dart';
 
 import '../../../../../app_theme.dart';
-import '../../../../../core/data/asky_dummy_data.dart';
 
 class AiMessageBubble extends StatelessWidget {
-  final AiMessage message;
+  final MessageEntity message;
 
   const AiMessageBubble({super.key, required this.message});
 
@@ -54,7 +54,10 @@ class AiMessageBubble extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Main text with optional link highlight
-                      _buildMessageText(text: message.text, context: context),
+                      _buildMessageText(
+                        text: message.content,
+                        context: context,
+                      ),
                     ],
                   ),
                 ),
@@ -62,7 +65,7 @@ class AiMessageBubble extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 6, left: 2),
                   child: Text(
-                    '${message.sender} · ${message.time}',
+                    '${message.role} · ${message.date}',
                     style: AppStyles.styleSemiBold14(
                       context,
                     ).copyWith(color: AppColors.textMuted),

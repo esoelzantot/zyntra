@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zyntra/core/data/asky_dummy_data.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
-import 'package:zyntra/features/asky_ai/presentation/widgets/side_bar/bottom_tabs.dart';
 
 import '../../../../../app_theme.dart';
 import 'resource_card.dart';
@@ -15,8 +14,6 @@ class AskySidebar extends StatefulWidget {
 }
 
 class _AskySidebarState extends State<AskySidebar> {
-  int _selectedTab = 1; // 0 = Threads, 1 = Resources
-
   @override
   Widget build(BuildContext context) {
     final resources = SampleData.resources;
@@ -34,28 +31,8 @@ class _AskySidebarState extends State<AskySidebar> {
           const SizedBox(height: 16),
 
           // ── Content ──────────────────────────────────────────
-          Expanded(
-            child: _selectedTab == 0
-                ? _buildThreads()
-                : _buildResources(resources),
-          ),
-
-          // ── Bottom Tabs ───────────────────────────────────────
-          const Divider(color: AppColors.border, height: 1),
-          BottomTabs(
-            selectedIndex: _selectedTab,
-            onTap: (i) => setState(() => _selectedTab = i),
-          ),
+          Expanded(child: _buildResources(resources)),
         ],
-      ),
-    );
-  }
-
-  Widget _buildThreads() {
-    return const Center(
-      child: Text(
-        'No threads yet',
-        style: TextStyle(color: AppColors.textMuted, fontSize: 13),
       ),
     );
   }
