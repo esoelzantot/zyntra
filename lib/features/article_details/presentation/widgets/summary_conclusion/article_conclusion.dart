@@ -24,7 +24,7 @@ class ArticleConclusion extends StatelessWidget {
             ).copyWith(color: AppColors.primaryColor),
           ),
           const SizedBox(height: 16),
-          Text(
+          SelectableText(
             text.trim(),
             style: AppStyles.styleRegular18(
               context,

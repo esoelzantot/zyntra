@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zyntra/core/data/asky_dummy_data.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/resource_entity.dart';
 import 'package:zyntra/features/asky_ai/presentation/widgets/chat_panal/chat_input_bar.dart';
 import 'package:zyntra/features/asky_ai/presentation/widgets/chat_panal/chat_messages_list.dart';
 import 'package:zyntra/features/asky_ai/presentation/widgets/side_bar/resource_card.dart';
@@ -14,22 +14,28 @@ class AskyChatMobileLayout extends StatefulWidget {
   State<AskyChatMobileLayout> createState() => _AskyChatMobileLayoutState();
 }
 
-class _AskyChatMobileLayoutState extends State<AskyChatMobileLayout>
-    with SingleTickerProviderStateMixin {
-  int _selectedTab = 1; // default: Session
+class _AskyChatMobileLayoutState extends State<AskyChatMobileLayout> {
+  int _selectedTab = 0;
+  List<ResourceEntity> _selectedResources = [];
 
-  // Keep pages alive while switching tabs
-  final _pages = const [_ThreadsPage(), _SessionPage(), _ResourcesPage()];
+  void _onResourcesTap(List<ResourceEntity> resources) {
+    setState(() {
+      _selectedResources = resources;
+      _selectedTab = 1; // انتقل لتاب الـ resources تلقائياً
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      _SessionPage(onResourcesTap: _onResourcesTap),
+      _ResourcesPage(resources: _selectedResources),
+    ];
+
     return Scaffold(
       backgroundColor: Colors.transparent,
-      // ── Top Bar ────────────────────────────────────────────────
       appBar: _MobileTopBar(selectedTab: _selectedTab),
-      // ── Body: keep all pages mounted ──────────────────────────
-      body: IndexedStack(index: _selectedTab, children: _pages),
-      // ── Bottom Navigation ──────────────────────────────────────
+      body: IndexedStack(index: _selectedTab, children: pages),
       bottomNavigationBar: _MobileBottomNav(
         selectedIndex: _selectedTab,
         onTap: (i) => setState(() => _selectedTab = i),
@@ -46,7 +52,7 @@ class _MobileTopBar extends StatelessWidget implements PreferredSizeWidget {
   final int selectedTab;
   const _MobileTopBar({required this.selectedTab});
 
-  static const _titles = ['Threads', 'Session', 'Resources'];
+  static const _titles = ['Session', 'Resources'];
 
   @override
   Size get preferredSize => const Size.fromHeight(80);
@@ -59,38 +65,32 @@ class _MobileTopBar extends StatelessWidget implements PreferredSizeWidget {
         border: Border(bottom: BorderSide(color: Colors.white, width: 1.0)),
       ),
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                children: [
-                  // Logo / Brand mark
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: AppColors.orange,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(
-                      Icons.auto_awesome,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    _titles[selectedTab],
-                    style: AppStyles.styleBold24(
-                      context,
-                    ).copyWith(color: AppColors.textPrimary),
-                  ),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            children: [
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: AppColors.orange,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(
+                  Icons.auto_awesome,
+                  color: Colors.white,
+                  size: 18,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(width: 10),
+              Text(
+                _titles[selectedTab],
+                style: AppStyles.styleBold24(
+                  context,
+                ).copyWith(color: AppColors.textPrimary),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -108,11 +108,6 @@ class _MobileBottomNav extends StatelessWidget {
   const _MobileBottomNav({required this.selectedIndex, required this.onTap});
 
   static const _items = [
-    _NavItem(
-      icon: Icons.forum_outlined,
-      activeIcon: Icons.forum,
-      label: 'Threads',
-    ),
     _NavItem(
       icon: Icons.chat_bubble_outline,
       activeIcon: Icons.chat_bubble,
@@ -143,39 +138,35 @@ class _MobileBottomNav extends StatelessWidget {
               return Expanded(
                 child: InkWell(
                   onTap: () => onTap(i),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeOut,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 200),
-                          child: Icon(
-                            isSelected ? item.activeIcon : item.icon,
-                            key: ValueKey(isSelected),
-                            size: 22,
-                            color: isSelected
-                                ? AppColors.orange
-                                : AppColors.textMuted,
-                          ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: Icon(
+                          isSelected ? item.activeIcon : item.icon,
+                          key: ValueKey(isSelected),
+                          size: 22,
+                          color: isSelected
+                              ? AppColors.orange
+                              : AppColors.textMuted,
                         ),
-                        const SizedBox(height: 3),
-                        Text(
-                          item.label,
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: isSelected
-                                ? FontWeight.w600
-                                : FontWeight.w400,
-                            color: isSelected
-                                ? AppColors.orange
-                                : AppColors.textMuted,
-                            letterSpacing: 0.1,
-                          ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        item.label,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: isSelected
+                              ? FontWeight.w600
+                              : FontWeight.w400,
+                          color: isSelected
+                              ? AppColors.orange
+                              : AppColors.textMuted,
+                          letterSpacing: 0.1,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -202,41 +193,11 @@ class _NavItem {
 // TAB PAGES
 // ─────────────────────────────────────────────────────────────────────────────
 
-/// Tab 0 – Threads
-class _ThreadsPage extends StatelessWidget {
-  const _ThreadsPage();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.forum_outlined, size: 48, color: AppColors.textMuted),
-          SizedBox(height: 12),
-          Text(
-            'No threads yet',
-            style: TextStyle(
-              color: AppColors.textMuted,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: 4),
-          Text(
-            'Start a new conversation to see threads here.',
-            style: TextStyle(color: AppColors.textMuted, fontSize: 13),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Tab 1 – Session (reuses ChatPanel logic inline)
+/// Tab 0 – Session
 class _SessionPage extends StatefulWidget {
-  const _SessionPage();
+  final ValueChanged<List<ResourceEntity>> onResourcesTap;
+
+  const _SessionPage({required this.onResourcesTap});
 
   @override
   State<_SessionPage> createState() => _SessionPageState();
@@ -244,7 +205,6 @@ class _SessionPage extends StatefulWidget {
 
 class _SessionPageState extends State<_SessionPage> {
   final _scrollController = ScrollController();
-  final _messages = SampleData.messages;
 
   @override
   void dispose() {
@@ -256,13 +216,10 @@ class _SessionPageState extends State<_SessionPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ChatTopBar is intentionally omitted here — the AppBar above handles it.
-        // If you still want per-session actions, keep ChatTopBar:
-        // const ChatTopBar(),
         Expanded(
           child: ChatMessagesList(
-            messages: _messages,
             scrollController: _scrollController,
+            onResourcesTap: widget.onResourcesTap,
           ),
         ),
         const ChatInputBar(),
@@ -271,13 +228,39 @@ class _SessionPageState extends State<_SessionPage> {
   }
 }
 
-/// Tab 2 – Resources
+/// Tab 1 – Resources
 class _ResourcesPage extends StatelessWidget {
-  const _ResourcesPage();
+  final List<ResourceEntity> resources;
+
+  const _ResourcesPage({required this.resources});
 
   @override
   Widget build(BuildContext context) {
-    final resources = SampleData.resources;
+    if (resources.isEmpty) {
+      return const Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.folder_outlined, size: 48, color: AppColors.textMuted),
+            SizedBox(height: 12),
+            Text(
+              'No resources yet',
+              style: TextStyle(
+                color: AppColors.textMuted,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(height: 4),
+            Text(
+              'Tap a message to see its sources',
+              style: TextStyle(color: AppColors.textMuted, fontSize: 13),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    }
 
     return ListView(
       padding: const EdgeInsets.only(top: 16, bottom: 16),

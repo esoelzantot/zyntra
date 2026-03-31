@@ -1,5 +1,5 @@
-import 'package:zyntra/features/asky_ai/domain/entities/thread_entity.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/message_entity.dart';
 
 abstract class AskyLocalDataSource {
-  Future<List<ThreadEntity>> getAllThreads({required int page});
+  Future<List<MessageEntity>> getAllMessages();
 }

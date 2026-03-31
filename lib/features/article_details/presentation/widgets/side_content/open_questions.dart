@@ -105,7 +105,7 @@ class _QuestionCardState extends State<_QuestionCard> {
 
             // ── Question Text ────────────────────────────
             Expanded(
-              child: Text(
+              child: SelectableText(
                 widget.question,
                 style: AppStyles.styleMedium16(
                   context,

@@ -102,7 +102,7 @@ class _MethodStep extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(bottom: isLast ? 0 : 20, top: 4),
-              child: Text(
+              child: SelectableText(
                 text,
                 style: AppStyles.styleMedium14(
                   context,

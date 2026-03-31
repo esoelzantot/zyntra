@@ -23,7 +23,7 @@ class ResearchQuestion extends StatelessWidget {
         const SizedBox(height: 8),
 
         // ── Question ───────────────────────────────────────
-        Text(
+        SelectableText(
           question,
           style: AppStyles.styleMedium16(
             context,

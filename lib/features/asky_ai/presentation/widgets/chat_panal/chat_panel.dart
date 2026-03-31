@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/resource_entity.dart';
 
-import '../../../../../core/data/asky_dummy_data.dart';
 import 'chat_input_bar.dart';
 import 'chat_messages_list.dart';
 import 'chat_top_bar.dart';
 
 class ChatPanel extends StatefulWidget {
-  const ChatPanel({super.key});
+  final ValueChanged<List<ResourceEntity>> onResourcesTap;
+
+  const ChatPanel({super.key, required this.onResourcesTap});
 
   @override
   State<ChatPanel> createState() => _ChatPanelState();
@@ -14,7 +16,6 @@ class ChatPanel extends StatefulWidget {
 
 class _ChatPanelState extends State<ChatPanel> {
   final _scrollController = ScrollController();
-  final _messages = SampleData.messages;
 
   @override
   void dispose() {
@@ -29,8 +30,8 @@ class _ChatPanelState extends State<ChatPanel> {
         const ChatTopBar(),
         Expanded(
           child: ChatMessagesList(
-            messages: _messages,
             scrollController: _scrollController,
+            onResourcesTap: widget.onResourcesTap,
           ),
         ),
         const ChatInputBar(),

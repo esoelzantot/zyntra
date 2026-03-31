@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:zyntra/core/apis/api_services.dart';
 import 'package:zyntra/core/cache/articles_cache_service_factory.dart';
-import 'package:zyntra/core/cache/threads_cache_service_factory.dart';
+import 'package:zyntra/core/cache/messages_cache_service.dart';
 import 'package:zyntra/features/article_details/data/data_sources/local/article_details_local_data_source_impl.dart';
 import 'package:zyntra/features/article_details/data/data_sources/remote/article_details_remote_data_source_impl.dart';
 import 'package:zyntra/features/article_details/data/repos/article_details_repo_impl.dart';
@@ -15,7 +15,7 @@ import 'package:zyntra/features/articles/domain/use_cases/get_all_articles_use_c
 import 'package:zyntra/features/asky_ai/data/data_sources/local/asky_local_data_source_impl.dart';
 import 'package:zyntra/features/asky_ai/data/data_sources/remote/asky_remote_data_source_impl.dart';
 import 'package:zyntra/features/asky_ai/data/repos/asky_repo_impl.dart';
-import 'package:zyntra/features/asky_ai/domain/use_cases/get_all_threads_use_case.dart';
+import 'package:zyntra/features/asky_ai/domain/use_cases/get_all_messages_use_case.dart';
 import 'package:zyntra/features/asky_ai/domain/use_cases/send_query_use_case.dart';
 import 'package:zyntra/features/home/data/data_sources/local/home_local_data_source_impl.dart';
 import 'package:zyntra/features/home/data/data_sources/remote/home_remote_data_source_impl.dart';
@@ -36,9 +36,7 @@ void setupServiceLocator() {
     ArticlesCacheServiceFactory(),
   );
 
-  getIt.registerSingleton<ThreadsCacheServiceFactory>(
-    ThreadsCacheServiceFactory(),
-  );
+  getIt.registerSingleton<MessagesCacheService>(MessagesCacheService());
 
   // HOME FEATURE
   getIt.registerSingleton<HomeLocalDataSourceImpl>(
@@ -146,13 +144,13 @@ void setupServiceLocator() {
 
   // ASKY FEATURE
   getIt.registerSingleton<AskyLocalDataSourceImpl>(
-    AskyLocalDataSourceImpl(cacheFactory: getIt<ThreadsCacheServiceFactory>()),
+    AskyLocalDataSourceImpl(cacheService: getIt<MessagesCacheService>()),
   );
 
   getIt.registerSingleton<AskyRemoteDataSourceImpl>(
     AskyRemoteDataSourceImpl(
       api: getIt<ApiServices>(),
-      cacheFactory: getIt<ThreadsCacheServiceFactory>(),
+      cacheService: getIt<MessagesCacheService>(),
     ),
   );
 
@@ -163,8 +161,8 @@ void setupServiceLocator() {
     ),
   );
 
-  getIt.registerSingleton<GetAllThreadsUseCase>(
-    GetAllThreadsUseCase(repo: getIt.get<AskyRepoImpl>()),
+  getIt.registerSingleton<GetAllMessagesUseCase>(
+    GetAllMessagesUseCase(repo: getIt.get<AskyRepoImpl>()),
   );
 
   getIt.registerSingleton<SendQueryUseCase>(

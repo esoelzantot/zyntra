@@ -28,7 +28,7 @@ class ArticleAbstract extends StatelessWidget {
               const SizedBox(height: 16),
 
               // Body text
-              Text(
+              SelectableText(
                 abstractText,
                 style: AppStyles.styleRegular20(
                   context,

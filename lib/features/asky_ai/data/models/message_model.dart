@@ -22,7 +22,11 @@ class MessageModel extends MessageEntity {
     query: json['query'] as String? ?? '',
     answer: json['answer'] as String? ?? '',
     resources: (json['sources'] != null)
-        ? List<ResourceModel>.from(json['sources'])
+        ? List<ResourceModel>.from(
+            json['sources'].map<ResourceModel>(
+              (r) => ResourceModel.fromJson(r),
+            ),
+          )
         : [],
   );
 
@@ -31,6 +35,13 @@ class MessageModel extends MessageEntity {
     'answer': answer,
     'sources': resources,
   };
+
+  MessageEntity toEntity() => MessageEntity(
+    role: role,
+    content: content,
+    date: date,
+    resources: resources,
+  );
 }
 
 String getCurrentTimeString() {
