@@ -54,7 +54,7 @@ class FindingCard extends StatelessWidget {
 
               // ── Text ─────────────────────────────────────────
               Expanded(
-                child: Text(
+                child: SelectableText(
                   text,
                   style: AppStyles.styleRegular16(
                     context,

@@ -36,7 +36,7 @@ class UserMessageBubble extends StatelessWidget {
                       bottomRight: Radius.circular(16),
                     ),
                   ),
-                  child: Text(
+                  child: SelectableText(
                     message.content,
                     style: AppStyles.styleRegular16(
                       context,

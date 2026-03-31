@@ -79,7 +79,7 @@ class _MechanismItem extends StatelessWidget {
 
               // ── Full text ──────────────────────────────
               Expanded(
-                child: Text(
+                child: SelectableText(
                   text,
                   style: AppStyles.styleMedium14(
                     context,

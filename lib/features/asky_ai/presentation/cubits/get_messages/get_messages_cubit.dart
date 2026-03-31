@@ -7,6 +7,8 @@ part 'get_messages_state.dart';
 class GetMessagesCubit extends Cubit<GetMessagesState> {
   final GetAllMessagesUseCase useCase;
 
+  List<MessageEntity> messages = [];
+
   GetMessagesCubit({required this.useCase}) : super(GetMessagesInitial());
 
   Future<void> getMessages() async {
@@ -15,8 +17,17 @@ class GetMessagesCubit extends Cubit<GetMessagesState> {
     final result = await useCase.call();
 
     result.fold(
-      (failure) => emit(GetMessagesError(message: failure.message)),
-      (messages) => emit(GetMessagesSuccess(messages: messages)),
+      (failure) => emit(GetMessagesFailure(message: failure.message)),
+      (messages) {
+        this.messages = messages;
+        emit(GetMessagesSuccess(messages: messages));
+      },
     );
+  }
+
+  void addMessage(MessageEntity message) {
+    messages.add(message);
+    emit(GetMessagesInitial());
+    emit(GetMessagesSuccess(messages: messages));
   }
 }

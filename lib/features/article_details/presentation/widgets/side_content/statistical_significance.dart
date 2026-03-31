@@ -41,7 +41,7 @@ class StatisticalSignificance extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Body
-                    Text(
+                    SelectableText(
                       body,
                       style: AppStyles.styleMedium16(
                         context,

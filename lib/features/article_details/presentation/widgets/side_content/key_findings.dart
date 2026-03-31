@@ -69,7 +69,7 @@ class _FindingItem extends StatelessWidget {
 
           // ── Finding Text ─────────────────────────────────
           Expanded(
-            child: Text(
+            child: SelectableText(
               finding,
               style: AppStyles.styleMedium16(
                 context,

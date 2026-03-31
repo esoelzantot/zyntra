@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zyntra/features/asky_ai/domain/entities/message_entity.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/resource_entity.dart';
 import 'package:zyntra/features/asky_ai/presentation/cubits/get_messages/get_messages_cubit.dart';
 
 import 'ai_message_bubble.dart';
+import 'chat_loading_indicator.dart';
 import 'empty_chat_widget.dart';
 import 'user_message_bubble.dart';
 
 class ChatMessagesList extends StatefulWidget {
   final ScrollController scrollController;
+  final ValueChanged<List<ResourceEntity>> onResourcesTap;
 
-  const ChatMessagesList({super.key, required this.scrollController});
+  const ChatMessagesList({
+    super.key,
+    required this.scrollController,
+    required this.onResourcesTap,
+  });
 
   @override
   State<ChatMessagesList> createState() => _ChatMessagesListState();
@@ -28,15 +35,10 @@ class _ChatMessagesListState extends State<ChatMessagesList> {
     return BlocBuilder<GetMessagesCubit, GetMessagesState>(
       builder: (context, state) {
         if (state is GetMessagesLoading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white54,
-              strokeWidth: 2,
-            ),
-          );
+          return const ChatLoadingIndicator();
         }
 
-        if (state is GetMessagesError) {
+        if (state is GetMessagesFailure) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,9 +62,7 @@ class _ChatMessagesListState extends State<ChatMessagesList> {
         if (state is GetMessagesSuccess) {
           final List<MessageEntity> messages = state.messages;
 
-          if (messages.isEmpty) {
-            return const EmptyChatWidget();
-          }
+          if (messages.isEmpty) return const EmptyChatWidget();
 
           return ListView.builder(
             controller: widget.scrollController,
@@ -70,8 +70,11 @@ class _ChatMessagesListState extends State<ChatMessagesList> {
             itemCount: messages.length,
             itemBuilder: (context, index) {
               final MessageEntity msg = messages[index];
-              if (msg.role == 'assistant') {
-                return AiMessageBubble(message: msg);
+              if (msg.role == 'asky') {
+                return AiMessageBubble(
+                  message: msg,
+                  onResourcesTap: widget.onResourcesTap,
+                );
               } else {
                 return UserMessageBubble(message: msg);
               }

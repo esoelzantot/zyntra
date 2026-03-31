@@ -70,7 +70,7 @@ class _ImplicationItem extends StatelessWidget {
 
           // ── Text ─────────────────────────────────────────
           Expanded(
-            child: Text(
+            child: SelectableText(
               text,
               style: AppStyles.styleMedium16(
                 context,

@@ -78,7 +78,7 @@ class ArticleIntroduction extends StatelessWidget {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            Text(
+            SelectableText(
               title,
               style: AppStyles.styleBold30(
                 context,

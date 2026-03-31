@@ -31,14 +31,11 @@ class AskyRepoImpl implements AskyRepo {
   }) async {
     try {
       final MessageEntity message = await remote.sendQuery(query: query);
+      await local.cacheService.appendMessage(message: message);
       return right(message);
-    } on DioException catch (e, trace) {
-      print(e);
-      print(trace);
+    } on DioException catch (e) {
       return left(ServerFailure.fromDioError(e));
-    } catch (e, trace) {
-      print(e);
-      print(trace);
+    } catch (e) {
       return left(ServerFailure(e.toString(), 400));
     }
   }

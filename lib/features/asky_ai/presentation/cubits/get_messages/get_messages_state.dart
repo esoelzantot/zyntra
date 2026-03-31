@@ -11,7 +11,7 @@ class GetMessagesSuccess extends GetMessagesState {
   GetMessagesSuccess({required this.messages});
 }
 
-class GetMessagesError extends GetMessagesState {
+class GetMessagesFailure extends GetMessagesState {
   final String message;
-  GetMessagesError({required this.message});
+  GetMessagesFailure({required this.message});
 }

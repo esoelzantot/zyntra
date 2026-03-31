@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+import 'package:zyntra/core/cache/messages_cache_service.dart';
 import 'package:zyntra/core/helpers/custom_loading_indicator.dart';
 import 'package:zyntra/core/helpers/custom_snack_bar.dart';
 import 'package:zyntra/core/utils/app_styles.dart';
+import 'package:zyntra/features/asky_ai/data/models/message_model.dart';
+import 'package:zyntra/features/asky_ai/domain/entities/message_entity.dart';
 import 'package:zyntra/features/asky_ai/domain/entities/query_entity.dart';
+import 'package:zyntra/features/asky_ai/presentation/cubits/get_messages/get_messages_cubit.dart';
 import 'package:zyntra/features/asky_ai/presentation/cubits/send_query/send_query_cubit.dart';
 
 import '../../../../../app_theme.dart';
@@ -77,16 +80,21 @@ class _ChatInputBarState extends State<ChatInputBar> {
                 listener: (context, state) {
                   // TODO: implement listener
                   if (state is SendQuerySuccess) {
-                    CustomSnackBar.showWarning(context, state.message.content);
+                    context.read<GetMessagesCubit>().addMessage(state.message);
                   }
-
                   if (state is SendQueryFailure) {
                     CustomSnackBar.showError(context, state.message);
                   }
                 },
                 builder: (context, state) {
                   if (state is SendQueryLoading) {
-                    return Center(child: CustomLoadingIndicator());
+                    return Center(
+                      child: SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: CustomLoadingIndicator(color: Colors.white),
+                      ),
+                    );
                   }
                   return _SendButton(active: _hasText, onTap: _send);
                 },
@@ -102,9 +110,16 @@ class _ChatInputBarState extends State<ChatInputBar> {
   void _send() {
     if (_hasText) {
       QueryEntity query = QueryEntity(message: _controller.text);
+      MessageEntity message = MessageEntity(
+        role: "user",
+        content: query.message,
+        date: getCurrentTimeString(),
+        resources: [],
+      );
+      context.read<GetMessagesCubit>().addMessage(message);
       context.read<SendQueryCubit>().sendQuery(query: query);
+      MessagesCacheService().appendMessage(message: message);
       FocusScope.of(context).unfocus();
-      Logger().i({'message': query.message});
       _controller.clear();
       setState(() => _hasText = false);
     }

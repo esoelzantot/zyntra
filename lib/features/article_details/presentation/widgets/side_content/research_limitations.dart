@@ -66,7 +66,7 @@ class _LimitationItem extends StatelessWidget {
 
           // ── Text ─────────────────────────────────────────
           Expanded(
-            child: Text(
+            child: SelectableText(
               text,
               style: AppStyles.styleMedium14(
                 context,
